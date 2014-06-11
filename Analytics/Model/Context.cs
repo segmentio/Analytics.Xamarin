@@ -11,7 +11,7 @@ namespace Segment.Model
         public Context() {
             // default the context library
             this.Add("library", new Dict() {
-			    { "name", "Analytics.NET" },
+				{ "name", "Analytics.Xamarin" },
 			    { "version", Analytics.VERSION }
 		    });
         }
