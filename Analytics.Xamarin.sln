@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analytics", "Analytics\Analytics.csproj", "{94A1E56C-5F8D-48DE-8473-DB47C6D2D5CF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analytics.Xamarin", "Analytics\Analytics.Xamarin.csproj", "{94A1E56C-5F8D-48DE-8473-DB47C6D2D5CF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{DF5F3A0E-A598-45CB-802F-A06967974362}"
 EndProject

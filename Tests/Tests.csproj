@@ -40,9 +40,9 @@
     <Compile Include="FlushTests.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Analytics\Analytics.csproj">
+    <ProjectReference Include="..\Analytics\Analytics.Xamarin.csproj">
       <Project>{94A1E56C-5F8D-48DE-8473-DB47C6D2D5CF}</Project>
-      <Name>Analytics</Name>
+      <Name>Analytics.Xamarin</Name>
     </ProjectReference>
   </ItemGroup>
 </Project>
