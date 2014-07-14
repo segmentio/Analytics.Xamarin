@@ -7,7 +7,7 @@ Analytics.Xamarin is a [Xamarin](http://xamarin.com) portable class library [(PC
 
 ## Documentation
 
-Documentation is available at [https://segment.io/libraries/xamarin](https://segment.io/libraries/xamarin).
+Documentation is available at [https://segment.io/docs/libraries/xamarin/](https://segment.io/docs/libraries/xamarin/).
 
 ## License
 
