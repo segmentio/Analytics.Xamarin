@@ -5,7 +5,7 @@ id: Analytics
 version: 1.0.0
 publisher: Segment, Inc
 license: License.md
-summary: "The Segment API is a better way to install analytics. Instrument your analytics once, and integrate hundreds of analytics tools with the flip of a switch."
+summary: "A beautiful API for adding analytics into your apps."
 getting-started: GettingStarted.md
 publisher-url: https://segment.io
 details: Details.md
