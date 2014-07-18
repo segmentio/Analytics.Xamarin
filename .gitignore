@@ -4,6 +4,9 @@
 
 *.userprefs
 
+# Xamarin package
+**.xam
+
 # mstest test results
 TestResults
 
