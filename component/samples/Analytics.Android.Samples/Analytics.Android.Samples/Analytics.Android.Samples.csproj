@@ -36,14 +36,18 @@
     <WarningLevel>4</WarningLevel>
     <AndroidUseSharedRuntime>false</AndroidUseSharedRuntime>
     <ConsolePause>false</ConsolePause>
+    <AndroidSupportedAbis>armeabi;armeabi-v7a;x86</AndroidSupportedAbis>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="Mono.Android" />
-    <Reference Include="Analytics.Xamarin">
-      <HintPath>..\..\..\..\Analytics\bin\Release\Analytics.Xamarin.dll</HintPath>
+    <Reference Include="System.Net.Http">
+      <HintPath>..\..\..\..\Analytics\bin\Release\System.Net.Http.dll</HintPath>
+    </Reference>
+    <Reference Include="Analytics">
+      <HintPath>..\..\..\..\Analytics\bin\Release\Analytics.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\..\..\Analytics\bin\Release\Newtonsoft.Json.dll</HintPath>
@@ -56,9 +60,6 @@
     </Reference>
     <Reference Include="System.Net.Http.Primitives">
       <HintPath>..\..\..\..\Analytics\bin\Release\System.Net.Http.Primitives.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Net.Http">
-      <HintPath>..\..\..\..\Analytics\bin\Release\System.Net.Http.dll</HintPath>
     </Reference>
     <Reference Include="System.Runtime">
       <HintPath>..\..\..\..\Analytics\bin\Release\System.Runtime.dll</HintPath>

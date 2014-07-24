@@ -88,9 +88,6 @@
     <Reference Include="System.Xml" />
     <Reference Include="System.Core" />
     <Reference Include="monotouch" />
-    <Reference Include="Analytics.Xamarin">
-      <HintPath>..\..\..\..\Analytics\bin\Release\Analytics.Xamarin.dll</HintPath>
-    </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\..\..\Analytics\bin\Release\Newtonsoft.Json.dll</HintPath>
     </Reference>
@@ -111,6 +108,9 @@
     </Reference>
     <Reference Include="System.Threading.Tasks">
       <HintPath>..\..\..\..\Analytics\bin\Release\System.Threading.Tasks.dll</HintPath>
+    </Reference>
+    <Reference Include="Analytics">
+      <HintPath>..\..\..\..\Analytics\bin\Release\Analytics.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
