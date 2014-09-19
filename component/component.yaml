@@ -1,7 +1,7 @@
 %YAML 1.2
 ---
 name: Segment Analytics
-id: Analytics
+id: SegmentAnalytics
 version: 1.0.0
 publisher: Segment, Inc
 license: License.md
