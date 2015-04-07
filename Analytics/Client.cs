@@ -137,8 +137,7 @@ namespace Segment
         ///
 		public void Identify(string userId, Traits traits, Options options)
         {
-			if (String.IsNullOrEmpty(userId))
-				throw new InvalidOperationException("Please supply a valid userId to Identify.");
+			ensureId (userId, options);
 
 			Enqueue(new Identify(userId, traits, options));
         }
@@ -212,8 +211,7 @@ namespace Segment
 		///
 		public void Group(string userId, string groupId, Traits traits, Options options)
 		{
-			if (String.IsNullOrEmpty(userId))
-				throw new InvalidOperationException("Please supply a valid userId to call #Group.");
+			ensureId (userId, options);
 
 			if (String.IsNullOrEmpty(groupId))
 				throw new InvalidOperationException("Please supply a valid groupId to call #Group.");
@@ -308,8 +306,7 @@ namespace Segment
 		///
 		public void Track(string userId, string eventName, Properties properties, Options options)
 		{
-			if (String.IsNullOrEmpty(userId))
-				throw new InvalidOperationException("Please supply a valid userId to Track.");
+			ensureId (userId, options);
 
 			if (String.IsNullOrEmpty(eventName))
 				throw new InvalidOperationException("Please supply a valid event to Track.");
@@ -478,8 +475,7 @@ namespace Segment
 		///
 		public void Page(string userId, string name, string category, Properties properties, Options options)
 		{
-			if (String.IsNullOrEmpty(userId))
-				throw new InvalidOperationException("Please supply a valid userId to #Page.");
+			ensureId (userId, options);
 
 			if (String.IsNullOrEmpty(name))
 				throw new InvalidOperationException("Please supply a valid name to #Page.");
@@ -615,8 +611,7 @@ namespace Segment
 		///
 		public void Screen(string userId, string name, string category, Properties properties, Options options)
 		{
-			if (String.IsNullOrEmpty(userId))
-				throw new InvalidOperationException("Please supply a valid userId to #Screen.");
+			ensureId (userId, options);
 
 			if (String.IsNullOrEmpty(name))
 				throw new InvalidOperationException("Please supply a valid name to #Screen.");
@@ -660,6 +655,12 @@ namespace Segment
 
             this.Statistics.Submitted += 1;
         }
+
+		private void ensureId(String userId, Options options)
+		{
+			if (String.IsNullOrEmpty(userId) && String.IsNullOrEmpty(options.AnonymousId))
+				throw new InvalidOperationException("Please supply a valid id (either userId or anonymousId.");
+		}
 
         #endregion
 
