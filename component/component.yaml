@@ -20,9 +20,9 @@ icons:
   - icons/icon_128x128.png
   - icons/icon_512x512.png
 samples:
-  - name: Android Sample
-    path: samples/Analytics.iOS.Samples/Analytics.iOS.Samples/Analytics.iOS.Samples.sln
   - name: iOS Sample
+    path: samples/Analytics.iOS.Samples/Analytics.iOS.Samples/Analytics.iOS.Samples.sln
+  - name: Android Sample
     path: samples/Analytics.Android.Samples/Analytics.Android.Samples/Analytics.Android.Samples.sln
 libraries:
   ios:
