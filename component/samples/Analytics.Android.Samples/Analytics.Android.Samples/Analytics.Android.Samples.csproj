@@ -52,20 +52,11 @@
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\..\..\..\Analytics\bin\Release\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="System.IO">
-      <HintPath>..\..\..\..\Analytics\bin\Release\System.IO.dll</HintPath>
-    </Reference>
     <Reference Include="System.Net.Http.Extensions">
       <HintPath>..\..\..\..\Analytics\bin\Release\System.Net.Http.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="System.Net.Http.Primitives">
       <HintPath>..\..\..\..\Analytics\bin\Release\System.Net.Http.Primitives.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Runtime">
-      <HintPath>..\..\..\..\Analytics\bin\Release\System.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="System.Threading.Tasks">
-      <HintPath>..\..\..\..\Analytics\bin\Release\System.Threading.Tasks.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
