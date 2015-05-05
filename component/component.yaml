@@ -2,13 +2,14 @@
 ---
 name: Segment Analytics
 id: SegmentAnalytics
-version: 1.0.0
+version: 1.0.1
 publisher: Segment, Inc
 license: License.md
 summary: "A beautiful API for adding analytics into your apps."
 getting-started: GettingStarted.md
 publisher-url: https://segment.io
 details: Details.md
+no_build: true
 screenshots:
   - screenshots/integrations.png
   - screenshots/diagram.png
