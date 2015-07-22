@@ -29,9 +29,12 @@ libraries:
   ios-unified:
     - ../Analytics/bin/Release/Analytics.dll
     - ../Analytics/bin/Release/Newtonsoft.Json.dll
+    - ../Analytics/bin/Release/System.IO.dll
     - ../Analytics/bin/Release/System.Net.Http.dll
     - ../Analytics/bin/Release/System.Net.Http.Extensions.dll
     - ../Analytics/bin/Release/System.Net.Http.Primitives.dll
+    - ../Analytics/bin/Release/System.Runtime.dll
+    - ../Analytics/bin/Release/System.Threading.Tasks.dll
   android:
     - ../Analytics/bin/Release/Analytics.dll
     - ../Analytics/bin/Release/Newtonsoft.Json.dll
