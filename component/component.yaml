@@ -7,7 +7,7 @@ publisher: Segment, Inc
 license: License.md
 summary: "A beautiful API for adding analytics into your apps."
 getting-started: GettingStarted.md
-publisher-url: https://segment.io
+publisher-url: https://segment.com
 details: Details.md
 no_build: true
 screenshots:
@@ -19,7 +19,7 @@ screenshots:
   - screenshots/libraries.png
 icons:
   - icons/icon_128x128.png
-  - icons/icon_512x512.png
+  - icons/icon_256x256.png
 samples:
   - name: iOS Sample
     path: samples/Analytics.iOS.Samples/Analytics.iOS.Samples/Analytics.iOS.Samples.sln

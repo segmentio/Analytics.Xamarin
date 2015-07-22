@@ -1,4 +1,4 @@
-[Segment](https://segment.io) is a better analytics API. Instrument your app once and install hundreds of analytics tools with the flip of a switch, instead of weeks of extra development work.
+[Segment](https://segment.com) is a better analytics API. Instrument your app once and install hundreds of analytics tools with the flip of a switch, instead of weeks of extra development work.
 
 If you're using tools like Google Analytics or Omniture, your code starts to look like this:
 
