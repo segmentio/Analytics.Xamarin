@@ -26,7 +26,7 @@ samples:
   - name: Android Sample
     path: samples/Analytics.Android.Samples/Analytics.Android.Samples/Analytics.Android.Samples.sln
 libraries:
-  ios:
+  ios-unified:
     - ../Analytics/bin/Release/Analytics.dll
     - ../Analytics/bin/Release/Newtonsoft.Json.dll
     - ../Analytics/bin/Release/System.Net.Http.dll
