@@ -2,7 +2,7 @@
 ---
 name: Segment Analytics
 id: Analytics
-version: 1.0.1
+version: 1.0.2
 publisher: Segment, Inc
 license: License.md
 summary: "A beautiful API for adding analytics into your apps."
