@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-using Segment.Model;
+﻿using Segment.Model;
 
 namespace Segment
 {
@@ -22,8 +19,6 @@ namespace Segment
             ERROR
         }
 
-        #region Events
-
         /// <summary>
         /// A logging event handler.   
         /// </summary>
@@ -33,11 +28,9 @@ namespace Segment
         public delegate void LogHandler(Level level, string message, Dict args);
         public static event LogHandler Handlers;
 
-        #endregion
-
         private static void _Log(Level level, string message, Dict args)
         {
-            if (Handlers != null) Handlers(level, message, args);
+            Handlers?.Invoke(level, message, args);
         }
 
         internal static void Debug(string message)

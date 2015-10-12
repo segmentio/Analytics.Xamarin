@@ -1,14 +1,6 @@
-using System;
 using System.Collections.Generic;
-using System.Net;
-using System.Runtime.Serialization.Json;
-using System.IO;
-using System.Threading;
-
-using Segment;
-using Segment.Request;
 using Segment.Model;
-using Segment.Exception;
+using Segment.Request;
 
 namespace Segment.Flush
 {
@@ -17,19 +9,19 @@ namespace Segment.Flush
 		/// <summary>
 		/// Creates a series of actions into a batch that we can send to the server
 		/// </summary>
-		private IBatchFactory _batchFactory;
+		private readonly IBatchFactory _batchFactory;
 		/// <summary>
 		/// Performs the actual HTTP request to our server
 		/// </summary>
-		private IRequestHandler _requestHandler;
+		private readonly IRequestHandler _requestHandler;
 
 		
 		internal BlockingFlushHandler(IBatchFactory batchFactory, 
 		                         IRequestHandler requestHandler)
 		{
 
-			this._batchFactory = batchFactory;
-			this._requestHandler = requestHandler;
+			_batchFactory = batchFactory;
+			_requestHandler = requestHandler;
 		}
 		
 		public void Process(BaseAction action)

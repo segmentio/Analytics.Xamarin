@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
 using Newtonsoft.Json;
 
 namespace Segment.Model
@@ -30,15 +27,15 @@ namespace Segment.Model
 		{
 			options = options ?? new Options ();
 
-			this.Type = type;
-			this.MessageId = Guid.NewGuid ().ToString();
+			Type = type;
+			MessageId = Guid.NewGuid ().ToString();
 			if (options.Timestamp.HasValue)
-				this.Timestamp = options.Timestamp.ToString ();
+				Timestamp = options.Timestamp.ToString ();
             else
-                this.Timestamp = DateTime.Now.ToString("o");
-			this.Context = options.Context;
-			this.Integrations = options.Integrations;
-			this.AnonymousId = options.AnonymousId;
+                Timestamp = DateTime.Now.ToString("o");
+			Context = options.Context;
+			Integrations = options.Integrations;
+			AnonymousId = options.AnonymousId;
         }
     }
 }

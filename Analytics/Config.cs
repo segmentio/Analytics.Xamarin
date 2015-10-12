@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Segment
 {
@@ -24,10 +21,10 @@ namespace Segment
 
 		public Config()
         {
-            this.Host = Defaults.Host;
-			this.Timeout = Defaults.Timeout;
-            this.MaxQueueSize = Defaults.MaxQueueCapacity;
-			this.Async = Defaults.Async;
+            Host = Defaults.Host;
+			Timeout = Defaults.Timeout;
+            MaxQueueSize = Defaults.MaxQueueCapacity;
+			Async = Defaults.Async;
         }
 
 		/// <summary>
@@ -37,7 +34,7 @@ namespace Segment
 		/// <returns></returns>
 		public Config SetTimeout(TimeSpan timeout)
 		{
-			this.Timeout = timeout;
+			Timeout = timeout;
 			return this;
 		}
 		
@@ -48,7 +45,7 @@ namespace Segment
 		/// <returns></returns>
 		public Config SetMaxQueueSize(int maxQueueSize)
 		{
-			this.MaxQueueSize = maxQueueSize;
+			MaxQueueSize = maxQueueSize;
 			return this;
 		}
 
@@ -66,7 +63,7 @@ namespace Segment
         /// <returns></returns>
 		public Config SetAsync(bool async)
         {
-			this.Async = async;
+			Async = async;
             return this;
         }
     }

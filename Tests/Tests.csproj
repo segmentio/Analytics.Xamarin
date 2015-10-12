@@ -7,7 +7,7 @@
     <SchemaVersion>2.0</SchemaVersion>
     <ProjectGuid>{DF5F3A0E-A598-45CB-802F-A06967974362}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Tests</RootNamespace>
+    <RootNamespace>Segment.Tests</RootNamespace>
     <AssemblyName>Tests</AssemblyName>
     <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <TargetFrameworkProfile />

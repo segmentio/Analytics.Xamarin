@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Segment.Model
 {
@@ -28,10 +24,10 @@ namespace Segment.Model
 
 			: base("page", options)
 		{
-			this.UserId = userId;
-			this.Name = name;
-			this.Category = category;
-            this.Properties = properties ?? new Properties();
+			UserId = userId;
+			Name = name;
+			Category = category;
+            Properties = properties ?? new Properties();
         }
     }
 }

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace Segment.Model
+﻿namespace Segment.Model
 {
     public class Traits : Dict
     {

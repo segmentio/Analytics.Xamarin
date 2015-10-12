@@ -1,8 +1,6 @@
 using System;
-
 using System.Collections.Generic;
 using System.Threading;
-
 using Segment.Model;
 
 namespace Segment.Flush
@@ -12,7 +10,7 @@ namespace Segment.Flush
 	/// </summary>
 	public class BlockingQueue<T> : IDisposable
 	{
-		private Queue<T> _queue = new Queue<T>();
+		private readonly Queue<T> _queue = new Queue<T>();
 
 		private bool _continue = true;
 
@@ -23,7 +21,7 @@ namespace Segment.Flush
 
 		public void Enqueue(T data)
 		{
-			if (data == null) throw new ArgumentNullException("No queue nulls allowed.");
+			if (data == null) throw new ArgumentNullException(nameof(data), "can't queue null");
 			if (!_continue) return;
 
 			lock (_queue)
@@ -45,9 +43,9 @@ namespace Segment.Flush
 			}
 		}
 
-		public int Count { get { return _queue.Count; } }
+		public int Count => _queue.Count;
 
-		public void Dispose() 
+	    public void Dispose() 
 		{
 			_continue = false;
 		}

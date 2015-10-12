@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-
-using Segment;
 using Segment.Model;
 
-namespace Segment.Test
+namespace Segment.Tests
 {
 	public class Actions
 	{
-		private static Random random = new Random();
+	    // ReSharper disable once InconsistentNaming
+		private static readonly Random random = new Random();
 
 		public static Properties Properties () 
 		{

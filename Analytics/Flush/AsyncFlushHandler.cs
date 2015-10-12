@@ -1,15 +1,8 @@
-using System;
 using System.Collections.Generic;
-using System.Net;
-using System.Runtime.Serialization.Json;
-using System.IO;
 using System.Threading;
 using System.Threading.Tasks;
-
-using Segment;
-using Segment.Request;
 using Segment.Model;
-using Segment.Exception;
+using Segment.Request;
 
 namespace Segment.Flush
 {
@@ -18,27 +11,27 @@ namespace Segment.Flush
         /// <summary>
         /// Internal message queue
         /// </summary>
-        private BlockingQueue<BaseAction> _queue;
+        private readonly BlockingQueue<BaseAction> _queue;
         
 		/// <summary>
 		/// Creates a series of actions into a batch that we can send to the server
 		/// </summary>
-		private IBatchFactory _batchFactory;
+		private readonly IBatchFactory _batchFactory;
 		/// <summary>
 		/// Performs the actual HTTP request to our server
 		/// </summary>
-		private IRequestHandler _requestHandler;
+		private readonly IRequestHandler _requestHandler;
 
 		/// <summary>
 		/// Cancellation token for the flushing task. 
 		/// </summary>
-		private CancellationTokenSource _continue;
+		private readonly CancellationTokenSource _continue;
 
 		/// <summary>
 		/// Marks that the current queue is empty and no flush is happening.
 		/// Flush will wait for this to be signaled.
 		/// </summary>
-		private ManualResetEvent _idle;
+		private readonly ManualResetEvent _idle;
 
         /// <summary>
         /// The max size of the queue to allow
@@ -53,10 +46,10 @@ namespace Segment.Flush
         {
 			_queue = new BlockingQueue<BaseAction>();
 
-			this._batchFactory = batchFactory;
-			this._requestHandler = requestHandler;
+			_batchFactory = batchFactory;
+			_requestHandler = requestHandler;
             
-			this.MaxQueueSize = maxQueueSize;
+			MaxQueueSize = maxQueueSize;
 
 			// set that the queue is currently empty
 			_idle = new ManualResetEvent(true);

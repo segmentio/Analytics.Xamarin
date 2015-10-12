@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-using Segment.Model;
 using Segment.Delegates;
+using Segment.Model;
 
 namespace Segment.Request
 {

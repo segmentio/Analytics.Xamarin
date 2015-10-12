@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Segment
+﻿namespace Segment
 {
     public class Analytics
     {
@@ -37,7 +33,8 @@ namespace Segment
         /// Initialized the default Segment.io client with your API writeKey.
         /// </summary>
         /// <param name="writeKey"></param>
-		public static void Initialize(string writeKey, Config config)
+        /// <param name="config"></param>
+        public static void Initialize(string writeKey, Config config)
         {
             lock (padlock)
             {

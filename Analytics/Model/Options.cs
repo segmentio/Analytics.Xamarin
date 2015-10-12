@@ -1,13 +1,11 @@
 ﻿using System;
 
-using Segment.Model;
-
 namespace Segment.Model
 {
 	public class Options
 	{
 		public string AnonymousId { get; private set; }
-		public Dict Integrations { get; private set; }
+		public Dict Integrations { get; }
 		public DateTime? Timestamp { get; private set; }
 		public Context Context { get; private set; }
 
@@ -17,8 +15,8 @@ namespace Segment.Model
 		/// </summary>
 		public Options ()
 		{
-			this.Integrations = new Dict ();
-			this.Context = new Context ();
+			Integrations = new Dict ();
+			Context = new Context ();
 		}
 
 		/// <summary>
@@ -29,7 +27,7 @@ namespace Segment.Model
 		/// <param name="anonymousId">The visitor's anonymousId.</param>
 		public Options SetAnonymousId (string anonymousId)
 		{
-			this.AnonymousId = anonymousId;
+			AnonymousId = anonymousId;
 			return this;
 		}
 			
@@ -42,7 +40,7 @@ namespace Segment.Model
 		/// <param name="anonymousId">The call's timestamp.</param>
 		public Options SetTimestamp (DateTime? timestamp)
 		{
-			this.Timestamp = timestamp;
+			Timestamp = timestamp;
 			return this;
 		}
 
@@ -54,7 +52,7 @@ namespace Segment.Model
 		/// <param name="anonymousId">The visitor's context.</param>
 		public Options SetContext (Context context)
 		{
-			this.Context = context;
+			Context = context;
 			return this;
 		}
 
@@ -69,7 +67,7 @@ namespace Segment.Model
 		/// <param name="enabled">If set to <c>true</c>, then the integration is enabled.</param>
 		public Options SetIntegration (string integration, bool enabled)
 		{
-			this.Integrations.Add (integration, enabled);
+			Integrations.Add (integration, enabled);
 			return this;
 		}
 

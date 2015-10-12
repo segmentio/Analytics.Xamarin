@@ -1,18 +1,10 @@
 using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Net;
 using System.Net.Http;
-using System.Runtime.Serialization.Json;
-using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
-
+using System.Text;
 using Newtonsoft.Json;
-
-using Segment.Model;
-using Segment.Exception;
 using Segment.Delegates;
+using Segment.Exception;
+using Segment.Model;
 
 namespace Segment.Request
 {
@@ -31,20 +23,20 @@ namespace Segment.Request
 		/// <summary>
 		/// Segment API endpoint.
 		/// </summary>
-		private string _host;
+		private readonly string _host;
 
 		/// <summary>
 		/// Http client
 		/// </summary>
-		private HttpClient _client;
+		private readonly HttpClient _client;
 
 		internal BlockingRequestHandler (string host, TimeSpan timeout)
 		{
-			this._host = host;
-			this._client = new HttpClient ();
-			this._client.Timeout = timeout;
+			_host = host;
+			_client = new HttpClient ();
+			_client.Timeout = timeout;
 			// do not use the expect 100-continue behavior
-			this._client.DefaultRequestHeaders.ExpectContinue = false;
+			_client.DefaultRequestHeaders.ExpectContinue = false;
 		}
 
 		public void SendBatch(Batch batch)

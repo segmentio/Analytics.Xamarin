@@ -1,11 +1,9 @@
-﻿using NUnit.Framework;
-using System;
+﻿using System;
 using System.Threading;
-
-using Segment;
+using NUnit.Framework;
 using Segment.Model;
 
-namespace Segment.Test
+namespace Segment.Tests
 {
 	[TestFixture ()]
 	public class FlushTests
@@ -87,14 +85,12 @@ namespace Segment.Test
 
 		void Client_Failed(BaseAction action, System.Exception e)
 		{
-			Console.WriteLine(String.Format("Action [{0}] {1} failed : {2}", 
-				action.MessageId, action.Type, e.Message));
+			Console.WriteLine("Action [{0}] {1} failed : {2}", action.MessageId, action.Type, e.Message);
 		}
 
 		void Client_Succeeded(BaseAction action)
 		{
-			Console.WriteLine(String.Format("Action [{0}] {1} succeeded.", 
-				action.MessageId, action.Type));
+			Console.WriteLine("Action [{0}] {1} succeeded.", action.MessageId, action.Type);
 		}
 
         static void LoggingHandler(Logger.Level level, string message, Dict args)
@@ -103,10 +99,10 @@ namespace Segment.Test
             {
                 foreach (string key in args.Keys)
                 {
-                    message += String.Format(" {0}: {1},", "" + key, "" + args[key]);
+                    message += string.Format(" {0}: {1},", "" + key, "" + args[key]);
                 }
             }
-            Console.WriteLine(String.Format("[FlushTests] [{0}] {1}", level, message));
+            Console.WriteLine("[FlushTests] [{0}] {1}", level, message);
         }
 	}
 }
