@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Segment.Model
+﻿namespace Segment.Model
 {
     public class Context : Dict
     {
@@ -10,7 +8,7 @@ namespace Segment.Model
         /// </summary>
         public Context() {
             // default the context library
-            this.Add("library", new Dict() {
+            Add("library", new Dict() {
 				{ "name", "Analytics.Xamarin" },
 			    { "version", Analytics.VERSION }
 		    });

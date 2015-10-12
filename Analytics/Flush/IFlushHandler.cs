@@ -1,7 +1,5 @@
 using System;
-
 using Segment.Model;
-using Segment.Request;
 
 namespace Segment.Flush
 {

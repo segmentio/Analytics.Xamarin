@@ -1,12 +1,8 @@
-﻿using NUnit.Framework;
-
-using System;
-using System.Collections.Generic;
-
-using Segment;
+﻿using System;
+using NUnit.Framework;
 using Segment.Model;
 
-namespace Segment.Test
+namespace Segment.Tests
 {
 	[TestFixture ()]
 	public class ActionTests
@@ -74,10 +70,10 @@ namespace Segment.Test
             if (args != null)
             {
                 foreach (string key in args.Keys) {
-                    message += String.Format(" {0}: {1},", "" + key, "" + args[key]);
+                    message += string.Format(" {0}: {1},", "" + key, "" + args[key]);
                 }
             }
-            Console.WriteLine(String.Format("[ActionTests] [{0}] {1}", level, message));
+            Console.WriteLine("[ActionTests] [{0}] {1}", level, message);
         }
 	}
 

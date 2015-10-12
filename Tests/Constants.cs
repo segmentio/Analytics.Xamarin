@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Segment.Test
+﻿namespace Segment.Tests
 {
 	public class Constants
 	{

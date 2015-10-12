@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Text;
-using System.Runtime.Serialization;
+﻿using System.Collections.Generic;
 
 namespace Segment.Model
 {
-	/// <summary>
-	/// An API object wrapper over Dictionary<string, object>
-	/// </summary>
+    /// <summary>
+    /// An API object wrapper over Dictionary string, object 
+    /// </summary>
     public class Dict : Dictionary<string, object>
     {
 		/// <summary>

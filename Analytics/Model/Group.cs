@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Segment.Model
 {
@@ -23,9 +19,9 @@ namespace Segment.Model
 					   Options options)
 			: base("group", options)
         {
-			this.UserId = userId;
-			this.GroupId = groupId;
-			this.Traits = traits ?? new Traits();
+			UserId = userId;
+			GroupId = groupId;
+			Traits = traits ?? new Traits();
         }
     }
 }

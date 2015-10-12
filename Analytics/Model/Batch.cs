@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
-
 using Newtonsoft.Json;
 
 namespace Segment.Model
@@ -21,12 +19,12 @@ namespace Segment.Model
 
       	internal Batch() 
 		{ 
-			this.MessageId = Guid.NewGuid ().ToString ();
+			MessageId = Guid.NewGuid ().ToString ();
 		}
 
         internal Batch(string writeKey, List<BaseAction> batch) : this()
         {
-            this.WriteKey = writeKey;
+            WriteKey = writeKey;
             this.batch = batch;
         }
     }

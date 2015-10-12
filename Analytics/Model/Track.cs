@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 
 namespace Segment.Model
 {
@@ -24,9 +20,9 @@ namespace Segment.Model
 
 			: base("track", options)
         {
-			this.UserId = userId;
-            this.EventName = eventName;
-            this.Properties = properties ?? new Properties();
+			UserId = userId;
+            EventName = eventName;
+            Properties = properties ?? new Properties();
         }
     }
 }
