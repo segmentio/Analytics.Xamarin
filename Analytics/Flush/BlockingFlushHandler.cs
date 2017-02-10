@@ -23,37 +23,35 @@ namespace Segment.Flush
 		/// </summary>
 		private IRequestHandler _requestHandler;
 
-		
-		internal BlockingFlushHandler(IBatchFactory batchFactory, 
-		                         IRequestHandler requestHandler)
+
+		internal BlockingFlushHandler(IBatchFactory batchFactory,
+								 IRequestHandler requestHandler)
 		{
 
 			this._batchFactory = batchFactory;
 			this._requestHandler = requestHandler;
 		}
-		
+
 		public void Process(BaseAction action)
 		{
 			Batch batch = _batchFactory.Create(new List<BaseAction>() { action });
 			_requestHandler.SendBatch(batch);
 		}
-		
+
 		/// <summary>
 		/// Returns immediately since the blocking flush handler does not queue
 		/// </summary>
-		public void Flush() 
+		public void Flush()
 		{
 			// do nothing
 		}
-		
+
 		/// <summary>
 		/// Does nothing, as nothing needs to be disposed here
 		/// </summary>
-		public void Dispose() 
+		public void Dispose()
 		{
 			// do nothing
 		}
-		
 	}
 }
-

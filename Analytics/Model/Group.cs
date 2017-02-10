@@ -7,7 +7,7 @@ using Newtonsoft.Json;
 namespace Segment.Model
 {
 	public class Group : BaseAction
-    {
+	{
 		[JsonProperty(PropertyName = "userId")]
 		public string UserId { get; private set; }
 
@@ -17,15 +17,15 @@ namespace Segment.Model
 		[JsonProperty(PropertyName = "traits")]
 		private Traits Traits { get; set; }
 
-		internal Group(string userId, 
+		internal Group(string userId,
 					   string groupId,
-					   Traits traits, 
+					   Traits traits,
 					   Options options)
 			: base("group", options)
-        {
+		{
 			this.UserId = userId;
 			this.GroupId = groupId;
 			this.Traits = traits ?? new Traits();
-        }
-    }
+		}
+	}
 }

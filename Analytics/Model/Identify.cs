@@ -6,22 +6,22 @@ using Newtonsoft.Json;
 
 namespace Segment.Model
 {
-    public class Identify : BaseAction
-    {
+	public class Identify : BaseAction
+	{
 		[JsonProperty(PropertyName = "userId")]
 		public string UserId { get; private set; }
 
-        [JsonProperty(PropertyName = "traits")]
+		[JsonProperty(PropertyName = "traits")]
 		public Traits Traits { get; set; }
 
-        internal Identify(string userId,
-		                  Traits traits, 
+		internal Identify(string userId,
+						  Traits traits,
 						  Options options)
-	
+
 			: base("identify", options)
-        {
+		{
 			this.UserId = userId;
-            this.Traits = traits ?? new Traits();
-        }
-    }
+			this.Traits = traits ?? new Traits();
+		}
+	}
 }

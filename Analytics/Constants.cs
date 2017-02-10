@@ -10,4 +10,3 @@ namespace Segment
 		public static int BatchIncrement = 20;
 	}
 }
-
