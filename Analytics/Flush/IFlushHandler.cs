@@ -22,4 +22,3 @@ namespace Segment.Flush
 		void Flush();
 	}
 }
-

@@ -32,7 +32,7 @@ namespace Segment.Flush
 				Monitor.Pulse(_queue);
 			}
 
-            Logger.Debug("Enqueued action in queue.", new Dict { { "queue size", _queue.Count } });
+			Logger.Debug("Enqueued action in queue.", new Dict { { "queue size", _queue.Count } });
 		}
 
 		public T Dequeue()
@@ -47,10 +47,9 @@ namespace Segment.Flush
 
 		public int Count { get { return _queue.Count; } }
 
-		public void Dispose() 
+		public void Dispose()
 		{
 			_continue = false;
 		}
 	}
 }
-

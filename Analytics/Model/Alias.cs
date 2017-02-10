@@ -13,7 +13,7 @@ namespace Segment.Model
 
 		[JsonProperty(PropertyName = "userId")]
 		private string UserId { get; set; }
-		
+
 		internal Alias(string previousId, string userId, Options options)
 			: base("alias", options)
 		{
@@ -22,4 +22,3 @@ namespace Segment.Model
 		}
 	}
 }
-

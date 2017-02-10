@@ -12,56 +12,58 @@ using Segment.Delegates;
 
 namespace Segment
 {
-    /// <summary>
-    /// A Segment.io .NET client
-    /// </summary>
-    public class Client : IDisposable
-    {
-        private IFlushHandler _flushHandler;
-        private string _writeKey;
+	/// <summary>
+	/// A Segment.io .NET client
+	/// </summary>
+	public class Client : IDisposable
+	{
+		private IFlushHandler _flushHandler;
+		private string _writeKey;
 		private Config _config;
 
-        public Statistics Statistics { get; set; }
+		public Statistics Statistics { get; set; }
 
-        #region Events
+		#region Events
 
 		public event FailedActionHandler Failed;
 		public event SucceededActionHandler Succeeded;
 
-        #endregion
+		#endregion
 
-        #region Initialization
+		#region Initialization
 
-        /// <summary>
-        /// Creates a new REST client with a specified API writeKey and default config
-        /// </summary>
-        /// <param name="writeKey"></param>
-        public Client(string writeKey) : this(writeKey, new Config()) {}
+		/// <summary>
+		/// Creates a new REST client with a specified API writeKey and default config
+		/// </summary>
+		/// <param name="writeKey"></param>
+		public Client(string writeKey) : this(writeKey, new Config()) { }
 
-        /// <summary>
-        /// Creates a new REST client with a specified API writeKey and default config
-        /// </summary>
-        /// <param name="writeKey"></param>
-        /// <param name="config"></param>
+		/// <summary>
+		/// Creates a new REST client with a specified API writeKey and default config
+		/// </summary>
+		/// <param name="writeKey"></param>
+		/// <param name="config"></param>
 		public Client(string writeKey, Config config)
-        {
-            if (String.IsNullOrEmpty(writeKey))
-                throw new InvalidOperationException("Please supply a valid writeKey to initialize.");
+		{
+			if (String.IsNullOrEmpty(writeKey))
+				throw new InvalidOperationException("Please supply a valid writeKey to initialize.");
 
-            this.Statistics = new Statistics();
+			this.Statistics = new Statistics();
 
-            this._writeKey = writeKey;
+			this._writeKey = writeKey;
 			this._config = config;
 
 			IRequestHandler requestHandler = new BlockingRequestHandler(config.Host, config.Timeout);
 			IBatchFactory batchFactory = new SimpleBatchFactory(this._writeKey);
 
-			requestHandler.Succeeded += (action) => {
+			requestHandler.Succeeded += (action) =>
+			{
 				this.Statistics.Succeeded += 1;
 				if (Succeeded != null) Succeeded(action);
 			};
 
-			requestHandler.Failed += (action, e) => {
+			requestHandler.Failed += (action, e) =>
+			{
 				this.Statistics.Failed += 1;
 				if (Failed != null) Failed(action, e);
 			};
@@ -70,77 +72,77 @@ namespace Segment
 				_flushHandler = new AsyncFlushHandler(batchFactory, requestHandler, config.MaxQueueSize);
 			else
 				_flushHandler = new BlockingFlushHandler(batchFactory, requestHandler);
-        }
+		}
 
-        #endregion
+		#endregion
 
-        #region Properties
+		#region Properties
 
-        public string WriteKey
-        {
-            get
-            {
-                return _writeKey;
-            }
-        }
+		public string WriteKey
+		{
+			get
+			{
+				return _writeKey;
+			}
+		}
 
 
 		public Config Config
-        {
-            get
-            {
+		{
+			get
+			{
 				return _config;
-            }
-        }
+			}
+		}
 
-        #endregion
+		#endregion
 
-        #region Public Methods
+		#region Public Methods
 
 		#region Identify
 
-        /// <summary>
-        /// Identifying a visitor ties all of their actions to an ID you
-        /// recognize and records visitor traits you can segment by.
-        /// </summary>
-        ///
-        /// <param name="userId">The visitor's identifier after they log in, or you know
-        /// who they are. By
-        /// explicitly identifying a user, you tie all of their actions to their identity.</param>
-        ///
-        /// <param name="traits">A dictionary with keys like "email", "name", “subscriptionPlan” or
-        /// "friendCount”. You can segment your users by any trait you record.
-        /// Pass in values in key-value format. String key, then its value
-        /// { String, Integer, Boolean, Double, or Date are acceptable types for a value. } </param>
-        ///
-        public void Identify(string userId, Traits traits)
-        {
-            Identify(userId, traits, null);
-        }
+		/// <summary>
+		/// Identifying a visitor ties all of their actions to an ID you
+		/// recognize and records visitor traits you can segment by.
+		/// </summary>
+		///
+		/// <param name="userId">The visitor's identifier after they log in, or you know
+		/// who they are. By
+		/// explicitly identifying a user, you tie all of their actions to their identity.</param>
+		///
+		/// <param name="traits">A dictionary with keys like "email", "name", “subscriptionPlan” or
+		/// "friendCount”. You can segment your users by any trait you record.
+		/// Pass in values in key-value format. String key, then its value
+		/// { String, Integer, Boolean, Double, or Date are acceptable types for a value. } </param>
+		///
+		public void Identify(string userId, Traits traits)
+		{
+			Identify(userId, traits, null);
+		}
 
-        /// <summary>
-        /// Identifying a visitor ties all of their actions to an ID you
-        /// recognize and records visitor traits you can segment by.
-        /// </summary>
-        ///
-        /// <param name="userId">The visitor's identifier after they log in, or you know
-        /// who they are. By
-        /// explicitly identifying a user, you tie all of their actions to their identity.</param>
-        ///
-        /// <param name="traits">A dictionary with keys like "email", "name", “subscriptionPlan” or
-        /// "friendCount”. You can segment your users by any trait you record.
-        /// Pass in values in key-value format. String key, then its value
-        /// { String, Integer, Boolean, Double, or Date are acceptable types for a value. } </param>
-        ///
+		/// <summary>
+		/// Identifying a visitor ties all of their actions to an ID you
+		/// recognize and records visitor traits you can segment by.
+		/// </summary>
+		///
+		/// <param name="userId">The visitor's identifier after they log in, or you know
+		/// who they are. By
+		/// explicitly identifying a user, you tie all of their actions to their identity.</param>
+		///
+		/// <param name="traits">A dictionary with keys like "email", "name", “subscriptionPlan” or
+		/// "friendCount”. You can segment your users by any trait you record.
+		/// Pass in values in key-value format. String key, then its value
+		/// { String, Integer, Boolean, Double, or Date are acceptable types for a value. } </param>
+		///
 		/// <param name="options">Options allowing you to set timestamp, anonymousId, target integrations,
 		/// and the context of th emessage.</param>
-        ///
+		///
 		public void Identify(string userId, Traits traits, Options options)
-        {
-			ensureId (userId, options);
+		{
+			ensureId(userId, options);
 
 			Enqueue(new Identify(userId, traits, options));
-        }
+		}
 
 		#endregion
 
@@ -164,7 +166,7 @@ namespace Segment
 		///
 		public void Group(string userId, string groupId, Options options)
 		{
-			Group (userId, groupId, null, options);
+			Group(userId, groupId, null, options);
 		}
 
 		/// <summary>
@@ -186,7 +188,7 @@ namespace Segment
 		///
 		public void Group(string userId, string groupId, Traits traits)
 		{
-			Group (userId, groupId, traits, null);
+			Group(userId, groupId, traits, null);
 		}
 
 		/// <summary>
@@ -211,7 +213,7 @@ namespace Segment
 		///
 		public void Group(string userId, string groupId, Traits traits, Options options)
 		{
-			ensureId (userId, options);
+			ensureId(userId, options);
 
 			if (String.IsNullOrEmpty(groupId))
 				throw new InvalidOperationException("Please supply a valid groupId to call #Group.");
@@ -223,41 +225,41 @@ namespace Segment
 
 		#region Track
 
-        /// <summary>
-        /// Whenever a user triggers an event on your site, you’ll want to track it.
-        /// </summary>
-        ///
-        /// <param name="userId">The visitor's identifier after they log in, or you know
-        /// who they are. </param>
-        ///
+		/// <summary>
+		/// Whenever a user triggers an event on your site, you’ll want to track it.
+		/// </summary>
+		///
+		/// <param name="userId">The visitor's identifier after they log in, or you know
+		/// who they are. </param>
+		///
 		/// <param name="eventName">The event name you are tracking. It is recommended
-        /// that it is in human readable form. For example, "Bought T-Shirt"
-        /// or "Started an exercise"</param>
-        ///
+		/// that it is in human readable form. For example, "Bought T-Shirt"
+		/// or "Started an exercise"</param>
+		///
 		public void Track(string userId, string eventName)
-        {
+		{
 			Track(userId, eventName, null, null);
-        }
+		}
 
-        /// <summary>
-        /// Whenever a user triggers an event on your site, you’ll want to track it.
-        /// </summary>
-        ///
-        /// <param name="userId">The visitor's identifier after they log in, or you know
-        /// who they are. </param>
-        ///
+		/// <summary>
+		/// Whenever a user triggers an event on your site, you’ll want to track it.
+		/// </summary>
+		///
+		/// <param name="userId">The visitor's identifier after they log in, or you know
+		/// who they are. </param>
+		///
 		/// <param name="eventName">The event name you are tracking. It is recommended
-        /// that it is in human readable form. For example, "Bought T-Shirt"
-        /// or "Started an exercise"</param>
-        ///
-        /// <param name="properties"> A dictionary with items that describe the event
-        /// in more detail. This argument is optional, but highly recommended —
-        /// you’ll find these properties extremely useful later.</param>
-        ///
+		/// that it is in human readable form. For example, "Bought T-Shirt"
+		/// or "Started an exercise"</param>
+		///
+		/// <param name="properties"> A dictionary with items that describe the event
+		/// in more detail. This argument is optional, but highly recommended —
+		/// you’ll find these properties extremely useful later.</param>
+		///
 		public void Track(string userId, string eventName, Properties properties)
-        {
+		{
 			Track(userId, eventName, properties, null);
-        }
+		}
 
 		/// <summary>
 		/// Whenever a user triggers an event on your site, you’ll want to track it
@@ -306,7 +308,7 @@ namespace Segment
 		///
 		public void Track(string userId, string eventName, Properties properties, Options options)
 		{
-			ensureId (userId, options);
+			ensureId(userId, options);
 
 			if (String.IsNullOrEmpty(eventName))
 				throw new InvalidOperationException("Please supply a valid event to Track.");
@@ -370,7 +372,7 @@ namespace Segment
 		///
 		public void Page(string userId, string name)
 		{
-			Page (userId, name, null, null, null);
+			Page(userId, name, null, null, null);
 		}
 
 		/// <summary>
@@ -389,7 +391,7 @@ namespace Segment
 		///
 		public void Page(string userId, string name, Options options)
 		{
-			Page (userId, name, null, null, options);
+			Page(userId, name, null, null, options);
 		}
 
 		/// <summary>
@@ -407,7 +409,7 @@ namespace Segment
 		///
 		public void Page(string userId, string name, string category)
 		{
-			Page (userId, name, category, null, null);
+			Page(userId, name, category, null, null);
 		}
 
 		/// <summary>
@@ -427,7 +429,7 @@ namespace Segment
 		///
 		public void Page(string userId, string name, Properties properties)
 		{
-			Page (userId, name, null, properties, null);
+			Page(userId, name, null, properties, null);
 		}
 
 		/// <summary>
@@ -450,7 +452,7 @@ namespace Segment
 		///
 		public void Page(string userId, string name, Properties properties, Options options)
 		{
-			Page (userId, name, null, properties, options);
+			Page(userId, name, null, properties, options);
 		}
 
 		/// <summary>
@@ -475,7 +477,7 @@ namespace Segment
 		///
 		public void Page(string userId, string name, string category, Properties properties, Options options)
 		{
-			ensureId (userId, options);
+			ensureId(userId, options);
 
 			if (String.IsNullOrEmpty(name))
 				throw new InvalidOperationException("Please supply a valid name to #Page.");
@@ -501,7 +503,7 @@ namespace Segment
 		///
 		public void Screen(string userId, string name)
 		{
-			Screen (userId, name, null, null, null);
+			Screen(userId, name, null, null, null);
 		}
 
 		/// <summary>
@@ -521,7 +523,7 @@ namespace Segment
 		///
 		public void Screen(string userId, string name, Options options)
 		{
-			Screen (userId, name, null, null, options);
+			Screen(userId, name, null, null, options);
 		}
 
 		/// <summary>
@@ -540,7 +542,7 @@ namespace Segment
 		///
 		public void Screen(string userId, string name, string category)
 		{
-			Screen (userId, name, category, null, null);
+			Screen(userId, name, category, null, null);
 		}
 
 		/// <summary>
@@ -561,7 +563,7 @@ namespace Segment
 		///
 		public void Screen(string userId, string name, Properties properties)
 		{
-			Screen (userId, name, null, properties, null);
+			Screen(userId, name, null, properties, null);
 		}
 
 		/// <summary>
@@ -585,7 +587,7 @@ namespace Segment
 		///
 		public void Screen(string userId, string name, Properties properties, Options options)
 		{
-			Screen (userId, name, null, properties, options);
+			Screen(userId, name, null, properties, options);
 		}
 
 		/// <summary>
@@ -611,7 +613,7 @@ namespace Segment
 		///
 		public void Screen(string userId, string name, string category, Properties properties, Options options)
 		{
-			ensureId (userId, options);
+			ensureId(userId, options);
 
 			if (String.IsNullOrEmpty(name))
 				throw new InvalidOperationException("Please supply a valid name to #Screen.");
@@ -621,15 +623,15 @@ namespace Segment
 
 		#endregion
 
-        #region Other
+		#region Other
 
-        /// <summary>
-        /// Blocks until all messages are flushed
-        /// </summary>
-        public void Flush()
-        {
+		/// <summary>
+		/// Blocks until all messages are flushed
+		/// </summary>
+		public void Flush()
+		{
 			_flushHandler.Flush();
-        }
+		}
 
 		/// <summary>
 		/// Disposes of the flushing thread and the message queue. Note, this does not call Flush() first.
@@ -638,23 +640,23 @@ namespace Segment
 		/// <see cref="Dispose"/> method leaves the <see cref="Segment.Client"/> in an unusable state. After calling
 		/// <see cref="Dispose"/>, you must release all references to the <see cref="Segment.Client"/> so the garbage
 		/// collector can reclaim the memory that the <see cref="Segment.Client"/> was occupying.</remarks>
-		public void Dispose() 
+		public void Dispose()
 		{
 			_flushHandler.Dispose();
 		}
 
-        #endregion
+		#endregion
 
-        #endregion
+		#endregion
 
-        #region Private Methods
+		#region Private Methods
 
-        private void Enqueue(BaseAction action)
-        {
-            _flushHandler.Process(action);
+		private void Enqueue(BaseAction action)
+		{
+			_flushHandler.Process(action);
 
-            this.Statistics.Submitted += 1;
-        }
+			this.Statistics.Submitted += 1;
+		}
 
 		private void ensureId(String userId, Options options)
 		{
@@ -662,20 +664,20 @@ namespace Segment
 				throw new InvalidOperationException("Please supply a valid id (either userId or anonymousId.");
 		}
 
-        #endregion
+		#endregion
 
-        #region Event API
+		#region Event API
 
-        internal void RaiseSuccess(BaseAction action)
-        {
-            if (Succeeded != null) Succeeded(action);
-        }
+		internal void RaiseSuccess(BaseAction action)
+		{
+			if (Succeeded != null) Succeeded(action);
+		}
 
-        internal void RaiseFailure(BaseAction action, System.Exception e)
-        {
-            if (Failed != null) Failed(action, e);
-        }
+		internal void RaiseFailure(BaseAction action, System.Exception e)
+		{
+			if (Failed != null) Failed(action, e);
+		}
 
-        #endregion
-    }
+		#endregion
+	}
 }

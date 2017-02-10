@@ -38,10 +38,10 @@ namespace Segment.Request
 		/// </summary>
 		private HttpClient _client;
 
-		internal BlockingRequestHandler (string host, TimeSpan timeout)
+		internal BlockingRequestHandler(string host, TimeSpan timeout)
 		{
 			this._host = host;
-			this._client = new HttpClient ();
+			this._client = new HttpClient();
 			this._client.Timeout = timeout;
 			// do not use the expect 100-continue behavior
 			this._client.DefaultRequestHeaders.ExpectContinue = false;
@@ -72,18 +72,20 @@ namespace Segment.Request
 				Logger.Info("Sending analytics request to Segment.io ..", props);
 
 				var start = DateTime.Now;
-			
+
 				var response = _client.SendAsync(request).Result;
 
 				var duration = DateTime.Now - start;
 				props["success"] = response.IsSuccessStatusCode;
 				props["duration (ms)"] = duration.TotalMilliseconds;
 
-				if (response.IsSuccessStatusCode) {
+				if (response.IsSuccessStatusCode)
+				{
 					Succeed(batch);
 					Logger.Info("Request successful", props);
 				}
-				else {
+				else
+				{
 					string reason = string.Format("Status Code {0} ", response.StatusCode);
 					reason += response.Content.ToString();
 					props["reason"] = reason;
@@ -93,41 +95,44 @@ namespace Segment.Request
 			}
 			catch (System.Exception e)
 			{
-				props ["reason"] = e.Message;
-				Logger.Error ("Request failed", props);
+				props["reason"] = e.Message;
+				Logger.Error("Request failed", props);
 				Fail(batch, e);
 			}
 		}
 
-		private void Fail(Batch batch, System.Exception e) 
+		private void Fail(Batch batch, System.Exception e)
 		{
 			foreach (BaseAction action in batch.batch)
 			{
-				if (Failed != null) {
-					Failed (action, e);
+				if (Failed != null)
+				{
+					Failed(action, e);
 				}
 			}
 		}
 
 
-		private void Succeed(Batch batch) 
+		private void Succeed(Batch batch)
 		{
 			foreach (BaseAction action in batch.batch)
 			{
-				if (Succeeded != null) {
-					Succeeded (action);
+				if (Succeeded != null)
+				{
+					Succeeded(action);
 				}
 			}
 		}
 
-		private string BasicAuthHeader(string user, string pass) 
+		private string BasicAuthHeader(string user, string pass)
 		{
 			string val = user + ":" + pass;
-			return  "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(val));
+			return "Basic " + Convert.ToBase64String(Encoding.UTF8.GetBytes(val));
 		}
 
-		public void Dispose() {
-			_client.Dispose ();
+		public void Dispose()
+		{
+			_client.Dispose();
 		}
 	}
 }

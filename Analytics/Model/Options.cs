@@ -15,10 +15,10 @@ namespace Segment.Model
 		/// Options object that allows the specification of a timestamp, 
 		/// an anonymousId, a context, or target integrations.
 		/// </summary>
-		public Options ()
+		public Options()
 		{
-			this.Integrations = new Dict ();
-			this.Context = new Context ();
+			this.Integrations = new Dict();
+			this.Context = new Context();
 		}
 
 		/// <summary>
@@ -27,12 +27,12 @@ namespace Segment.Model
 		/// </summary>
 		/// <returns>This Options object for chaining.</returns>
 		/// <param name="anonymousId">The visitor's anonymousId.</param>
-		public Options SetAnonymousId (string anonymousId)
+		public Options SetAnonymousId(string anonymousId)
 		{
 			this.AnonymousId = anonymousId;
 			return this;
 		}
-			
+
 		/// <summary>
 		/// Sets the timestamp of when an analytics call occured. The timestamp is primarily used for 
 		/// historical imports or if this event happened in the past. The timestamp is not required, 
@@ -40,7 +40,7 @@ namespace Segment.Model
 		/// </summary>
 		/// <returns>This Options object for chaining.</returns>
 		/// <param name="anonymousId">The call's timestamp.</param>
-		public Options SetTimestamp (DateTime? timestamp)
+		public Options SetTimestamp(DateTime? timestamp)
 		{
 			this.Timestamp = timestamp;
 			return this;
@@ -52,7 +52,7 @@ namespace Segment.Model
 		/// </summary>
 		/// <returns>This Options object for chaining.</returns>
 		/// <param name="anonymousId">The visitor's context.</param>
-		public Options SetContext (Context context)
+		public Options SetContext(Context context)
 		{
 			this.Context = context;
 			return this;
@@ -67,9 +67,9 @@ namespace Segment.Model
 		/// </summary>
 		/// <param name="integration">The integration name.</param>
 		/// <param name="enabled">If set to <c>true</c>, then the integration is enabled.</param>
-		public Options SetIntegration (string integration, bool enabled)
+		public Options SetIntegration(string integration, bool enabled)
 		{
-			this.Integrations.Add (integration, enabled);
+			this.Integrations.Add(integration, enabled);
 			return this;
 		}
 

@@ -13,13 +13,13 @@ using Segment.Exception;
 
 namespace Segment.Flush
 {
-    internal class AsyncFlushHandler : IFlushHandler
-    {
-        /// <summary>
-        /// Internal message queue
-        /// </summary>
-        private BlockingQueue<BaseAction> _queue;
-        
+	internal class AsyncFlushHandler : IFlushHandler
+	{
+		/// <summary>
+		/// Internal message queue
+		/// </summary>
+		private BlockingQueue<BaseAction> _queue;
+
 		/// <summary>
 		/// Creates a series of actions into a batch that we can send to the server
 		/// </summary>
@@ -40,22 +40,22 @@ namespace Segment.Flush
 		/// </summary>
 		private ManualResetEvent _idle;
 
-        /// <summary>
-        /// The max size of the queue to allow
-        /// This condition prevents high performance condition causing
-        /// this library to eat memory. 
-        /// </summary>
+		/// <summary>
+		/// The max size of the queue to allow
+		/// This condition prevents high performance condition causing
+		/// this library to eat memory. 
+		/// </summary>
 		internal int MaxQueueSize { get; set; }
 
-        internal AsyncFlushHandler(IBatchFactory batchFactory, 
-		                         IRequestHandler requestHandler, 
-		                         int maxQueueSize)
-        {
+		internal AsyncFlushHandler(IBatchFactory batchFactory,
+								 IRequestHandler requestHandler,
+								 int maxQueueSize)
+		{
 			_queue = new BlockingQueue<BaseAction>();
 
 			this._batchFactory = batchFactory;
 			this._requestHandler = requestHandler;
-            
+
 			this.MaxQueueSize = maxQueueSize;
 
 			// set that the queue is currently empty
@@ -64,102 +64,104 @@ namespace Segment.Flush
 			_continue = new CancellationTokenSource();
 
 			// start the long running flushing task
-			Task.Factory.StartNew (() => Loop (), _continue.Token);
-        }
+			Task.Factory.StartNew(() => Loop(), _continue.Token);
+		}
 
-        public void Process(BaseAction action)
-        {
+		public void Process(BaseAction action)
+		{
 			int size = _queue.Count;
 
-            if (size > MaxQueueSize)
-            {
-                Logger.Warn("Dropped message because queue is too full.", new Dict
-                {
-                    { "message id", action.MessageId },
-                    { "queue size", _queue.Count },
-                    { "max queue size", MaxQueueSize }
-                });
-            }
-            else
-            {
-            	 _queue.Enqueue(action);
-            }
-        }
+			if (size > MaxQueueSize)
+			{
+				Logger.Warn("Dropped message because queue is too full.", new Dict
+				{
+					{ "message id", action.MessageId },
+					{ "queue size", _queue.Count },
+					{ "max queue size", MaxQueueSize }
+				});
+			}
+			else
+			{
+				_queue.Enqueue(action);
+			}
+		}
 
 		/// <summary>
 		/// Blocks until all the messages are flushed
 		/// </summary>
-		public void Flush() 
+		public void Flush()
 		{
-            // if the queue has items and the flushing thread is still on WAIT for the blocking
-            // queue, then the idle event could still be triggered. in that case, we want to reset it
-            if (_queue.Count > 0) _idle.Reset(); 
+			// if the queue has items and the flushing thread is still on WAIT for the blocking
+			// queue, then the idle event could still be triggered. in that case, we want to reset it
+			if (_queue.Count > 0) _idle.Reset();
 
-            Logger.Debug("Blocking flush waiting until the queue if fully empty ..");
-			
-            _idle.WaitOne ();
-            
-            Logger.Debug("Blocking flush completed.");
+			Logger.Debug("Blocking flush waiting until the queue if fully empty ..");
+
+			_idle.WaitOne();
+
+			Logger.Debug("Blocking flush completed.");
 		}
 
 		/// <summary>
 		/// Loops on the flushing thread and processes the message queue
 		/// </summary>
 		private void Loop()
-        {
-            Logger.Debug("Starting async flush thread ..");
+		{
+			Logger.Debug("Starting async flush thread ..");
 
 			List<BaseAction> current = new List<BaseAction>();
 
 			// keep looping while flushing thread is active
-			while (!_continue.Token.IsCancellationRequested) {
-
-				do {
+			while (!_continue.Token.IsCancellationRequested)
+			{
+				do
+				{
 
 					// the only time we're actually not flushing
 					// is if the condition that the queue is empty here
-                    if (_queue.Count == 0)
-                    {
-                        _idle.Set();
+					if (_queue.Count == 0)
+					{
+						_idle.Set();
 
-                        Logger.Debug("Queue is empty, flushing is finished.");
-                    }
+						Logger.Debug("Queue is empty, flushing is finished.");
+					}
 
 					// blocks and waits for a dequeue
 					BaseAction action = _queue.Dequeue();
-                    
-					if (action == null) 
+
+					if (action == null)
 					{
 						// the queue was disposed, so we're done with this batch
 						break;
 
-					} else 
+					}
+					else
 					{
 						// we are no longer idle since there's messages to be processed
-						_idle.Reset ();
+						_idle.Reset();
 
 						// add this action to the current batch
 						current.Add(action);
 
-                        Logger.Debug("Dequeued action in async loop.", new Dict{ 
-                            { "message id", action.MessageId },
-                            { "queue size", _queue.Count }
-                         });
+						Logger.Debug("Dequeued action in async loop.", new Dict{
+							{ "message id", action.MessageId },
+							{ "queue size", _queue.Count }
+						 });
 					}
-				} 
+				}
 				// if we can easily see that there's still stuff in the queue
 				// we'd prefer to add more to the current batch to send more
 				// at once. But only if we're not disposed yet (_continue is true).
 				while (!_continue.Token.IsCancellationRequested && _queue.Count > 0 && current.Count <= Constants.BatchIncrement);
 
-				if (current.Count > 0) 
+				if (current.Count > 0)
 				{
 					// we have a batch that we're trying to send
 					Batch batch = _batchFactory.Create(current);
 
-                    Logger.Debug("Created flush batch.", new Dict {
-                        { "batch size", current.Count }
-                    });
+					Logger.Debug("Created flush batch.", new Dict {
+						{ "batch size", current.Count }
+					});
 
 					// make the request here
 					_requestHandler.SendBatch(batch);
@@ -178,7 +180,7 @@ namespace Segment.Flush
 		/// After calling <see cref="Dispose"/>, you must release all references to the
 		/// <see cref="Segment.Flush.AsyncFlushHandler"/> so the garbage collector can reclaim the memory that the
 		/// <see cref="Segment.Flush.AsyncFlushHandler"/> was occupying.</remarks>
-		public void Dispose() 
+		public void Dispose()
 		{
 			// tell the flushing thread to stop 
 			_continue.Cancel();
@@ -186,7 +188,5 @@ namespace Segment.Flush
 			// tell the queue to stop blocking if it is currently doing so
 			_queue.Dispose();
 		}
-	
-    }
+	}
 }
-
