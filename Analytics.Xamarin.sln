@@ -1,6 +1,8 @@
 ﻿
-Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2010
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 14
+VisualStudioVersion = 14.0.25420.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Analytics", "Analytics\Analytics.csproj", "{94A1E56C-5F8D-48DE-8473-DB47C6D2D5CF}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{DF5F3A0E-A598-45CB-802F-A06967974362}"
@@ -19,6 +21,9 @@ Global
 		{DF5F3A0E-A598-45CB-802F-A06967974362}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF5F3A0E-A598-45CB-802F-A06967974362}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{DF5F3A0E-A598-45CB-802F-A06967974362}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		StartupItem = Tests\Tests.csproj
