@@ -19,35 +19,35 @@
 
 			<!--Xamarin.Android-->
 			<group targetFramework="MonoAndroid10">
-				<dependency id="Microsoft.Bcl.Build" version="1.1.21" />
-				<dependency id="Microsoft.Bcl" version="1.1.10" />
-				<dependency id="Microsoft.Net.Http" version="2.2.29" />
-				<dependency id="Newtonsoft.Json" version="9.0.1" />
+				<dependency id="Microsoft.Bcl.Build" version="1.0" />
+				<dependency id="Microsoft.Bcl" version="1.1" />
+				<dependency id="Microsoft.Net.Http" version="2.2" />
+				<dependency id="Newtonsoft.Json" version="9.0" />
 			</group>
 
 			<!--Xamarin.iOS Unified-->
 			<group targetFramework="Xamarin.iOS10">
-				<dependency id="Microsoft.Bcl.Build" version="1.1.21" />
-				<dependency id="Microsoft.Bcl" version="1.1.10" />
-				<dependency id="Microsoft.Net.Http" version="2.2.29" />
-				<dependency id="Newtonsoft.Json" version="9.0.1" />
+				<dependency id="Microsoft.Bcl.Build" version="1.0" />
+				<dependency id="Microsoft.Bcl" version="1.1" />
+				<dependency id="Microsoft.Net.Http" version="2.2" />
+				<dependency id="Newtonsoft.Json" version="9.0" />
 			</group>
 
 			<!--Win Universal-->
 			<group targetFramework="uap10.0">
 				<dependency id="Microsoft.NETCore.UniversalWindowsPlatform" version="5.2.2"/>
-				<dependency id="Microsoft.Bcl.Build" version="1.1.21" />
-				<dependency id="Microsoft.Bcl" version="1.1.10" />
-				<dependency id="Microsoft.Net.Http" version="2.2.29" />
-				<dependency id="Newtonsoft.Json" version="9.0.1" />
+				<dependency id="Microsoft.Bcl.Build" version="1.0" />
+				<dependency id="Microsoft.Bcl" version="1.1" />
+				<dependency id="Microsoft.Net.Http" version="2.2" />
+				<dependency id="Newtonsoft.Json" version="9.0" />
 			</group>
 
 			<!--.Net 4.5.1-->
 			<group targetFramework="net451">
-				<dependency id="Microsoft.Bcl.Build" version="1.1.21" />
-				<dependency id="Microsoft.Bcl" version="1.1.10" />
-				<dependency id="Microsoft.Net.Http" version="2.2.29" />
-				<dependency id="Newtonsoft.Json" version="9.0.1" />
+				<dependency id="Microsoft.Bcl.Build" version="1.0" />
+				<dependency id="Microsoft.Bcl" version="1.1" />
+				<dependency id="Microsoft.Net.Http" version="2.2" />
+				<dependency id="Newtonsoft.Json" version="9.0" />
 			</group>
 			
         </dependencies>
