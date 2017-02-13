@@ -115,7 +115,7 @@ namespace Segment
 		/// Pass in values in key-value format. String key, then its value
 		/// { String, Integer, Boolean, Double, or Date are acceptable types for a value. } </param>
 		///
-		public void Identify(string userId, Traits traits)
+		public void Identify(string userId, IDictionary<string, object> traits)
 		{
 			Identify(userId, traits, null);
 		}
@@ -137,7 +137,7 @@ namespace Segment
 		/// <param name="options">Options allowing you to set timestamp, anonymousId, target integrations,
 		/// and the context of th emessage.</param>
 		///
-		public void Identify(string userId, Traits traits, Options options)
+		public void Identify(string userId, IDictionary<string, object> traits, Options options)
 		{
 			ensureId(userId, options);
 
@@ -186,7 +186,7 @@ namespace Segment
 		/// You can segment your users by any trait you record. Pass in values in key-value format. 
 		/// String key, then its value { String, Integer, Boolean, Double, or Date are acceptable types for a value. } </param>
 		///
-		public void Group(string userId, string groupId, Traits traits)
+		public void Group(string userId, string groupId, IDictionary<string, object> traits)
 		{
 			Group(userId, groupId, traits, null);
 		}
@@ -211,7 +211,7 @@ namespace Segment
 		/// <param name="options">Options allowing you to set timestamp, anonymousId, target integrations,
 		/// and the context of th emessage.</param>
 		///
-		public void Group(string userId, string groupId, Traits traits, Options options)
+		public void Group(string userId, string groupId, IDictionary<string, object> traits, Options options)
 		{
 			ensureId(userId, options);
 
@@ -256,7 +256,7 @@ namespace Segment
 		/// in more detail. This argument is optional, but highly recommended —
 		/// you’ll find these properties extremely useful later.</param>
 		///
-		public void Track(string userId, string eventName, Properties properties)
+		public void Track(string userId, string eventName, IDictionary<string, object> properties)
 		{
 			Track(userId, eventName, properties, null);
 		}
@@ -306,7 +306,7 @@ namespace Segment
 		/// and the context of th emessage.</param>
 		/// 
 		///
-		public void Track(string userId, string eventName, Properties properties, Options options)
+		public void Track(string userId, string eventName, IDictionary<string, object> properties, Options options)
 		{
 			ensureId(userId, options);
 
@@ -427,7 +427,7 @@ namespace Segment
 		/// in more detail. This argument is optional, but highly recommended —
 		/// you’ll find these properties extremely useful later.</param>
 		///
-		public void Page(string userId, string name, Properties properties)
+		public void Page(string userId, string name, IDictionary<string, object> properties)
 		{
 			Page(userId, name, null, properties, null);
 		}
@@ -450,7 +450,7 @@ namespace Segment
 		/// <param name="options">Options allowing you to set timestamp, anonymousId, target integrations,
 		/// and the context of th emessage.</param>
 		///
-		public void Page(string userId, string name, Properties properties, Options options)
+		public void Page(string userId, string name, IDictionary<string, object> properties, Options options)
 		{
 			Page(userId, name, null, properties, options);
 		}
@@ -475,7 +475,7 @@ namespace Segment
 		/// <param name="options">Options allowing you to set timestamp, anonymousId, target integrations,
 		/// and the context of th emessage.</param>
 		///
-		public void Page(string userId, string name, string category, Properties properties, Options options)
+		public void Page(string userId, string name, string category, IDictionary<string, object> properties, Options options)
 		{
 			ensureId(userId, options);
 
@@ -561,7 +561,7 @@ namespace Segment
 		/// in more detail. This argument is optional, but highly recommended —
 		/// you’ll find these properties extremely useful later.</param>
 		///
-		public void Screen(string userId, string name, Properties properties)
+		public void Screen(string userId, string name, IDictionary<string, object> properties)
 		{
 			Screen(userId, name, null, properties, null);
 		}
@@ -585,7 +585,7 @@ namespace Segment
 		/// <param name="options">Options allowing you to set timestamp, anonymousId, target integrations,
 		/// and the context of th emessage.</param>
 		///
-		public void Screen(string userId, string name, Properties properties, Options options)
+		public void Screen(string userId, string name, IDictionary<string, object> properties, Options options)
 		{
 			Screen(userId, name, null, properties, options);
 		}
@@ -611,7 +611,7 @@ namespace Segment
 		/// <param name="options">Options allowing you to set timestamp, anonymousId, target integrations,
 		/// and the context of th emessage.</param>
 		///
-		public void Screen(string userId, string name, string category, Properties properties, Options options)
+		public void Screen(string userId, string name, string category, IDictionary<string, object> properties, Options options)
 		{
 			ensureId(userId, options);
 
