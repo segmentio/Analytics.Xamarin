@@ -658,9 +658,9 @@ namespace Segment
 			this.Statistics.Submitted += 1;
 		}
 
-		private void ensureId(String userId, Options options)
+		protected void ensureId(String userId, Options options)
 		{
-			if (String.IsNullOrEmpty(userId) && String.IsNullOrEmpty(options.AnonymousId))
+			if (String.IsNullOrEmpty(userId) && String.IsNullOrEmpty(options?.AnonymousId))
 				throw new InvalidOperationException("Please supply a valid id (either userId or anonymousId.");
 		}
 
