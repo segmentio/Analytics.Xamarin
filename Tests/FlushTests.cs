@@ -77,7 +77,7 @@ namespace Segment.Test
 			Assert.IsTrue(duration.CompareTo(TimeSpan.FromSeconds(20)) < 0);
 		}
 
-		private void RunTests(Client client, int trials)
+		private void RunTests(IClient client, int trials)
 		{
 			for (int i = 0; i < trials; i += 1)
 			{

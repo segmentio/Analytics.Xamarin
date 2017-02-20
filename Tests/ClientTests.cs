@@ -62,5 +62,57 @@ namespace Tests
 
 			Assert.IsFalse(test.EnsureId("", null));
 		}
+
+		[Test]
+		public void LateInit()
+		{
+			var test = new TestClient();
+			test.Initialize(Segment.Test.Constants.WRITE_KEY);
+		}
+
+		[Test]
+		public void initConfig()
+		{
+			var test = new Client(Segment.Test.Constants.WRITE_KEY);
+			Assert.IsNotNull(test.Config);
+		}
+
+		[Test]
+		public void initConfig_1()
+		{
+			var test = new Client(Segment.Test.Constants.WRITE_KEY, new Config());
+			Assert.IsNotNull(test.Config);
+		}
+
+		[Test]
+		public void initConfig_2()
+		{
+			var test = new Client(Segment.Test.Constants.WRITE_KEY, null);
+			Assert.IsNotNull(test.Config);
+		}
+
+		[Test]
+		public void initConfig_3()
+		{
+			var test = new Client();
+			test.Initialize(Segment.Test.Constants.WRITE_KEY);
+			Assert.IsNotNull(test.Config);
+		}
+
+		[Test]
+		public void initConfig_4()
+		{
+			var test = new Client();
+			test.Initialize(Segment.Test.Constants.WRITE_KEY, new Config());
+			Assert.IsNotNull(test.Config);
+		}
+
+		[Test]
+		public void initConfig_5()
+		{
+			var test = new Client();
+			test.Initialize(Segment.Test.Constants.WRITE_KEY, null);
+			Assert.IsNotNull(test.Config);
+		}
 	}
 }

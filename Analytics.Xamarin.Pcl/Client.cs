@@ -15,13 +15,15 @@ namespace Segment
 	/// <summary>
 	/// A Segment.io .NET client
 	/// </summary>
-	public class Client : IDisposable
+	public class Client : IClient
 	{
+		#region Fields
+
 		private IFlushHandler _flushHandler;
 		private string _writeKey;
 		private Config _config;
 
-		public Statistics Statistics { get; set; }
+		#endregion //Fields
 
 		#region Events
 
@@ -30,53 +32,9 @@ namespace Segment
 
 		#endregion
 
-		#region Initialization
-
-		/// <summary>
-		/// Creates a new REST client with a specified API writeKey and default config
-		/// </summary>
-		/// <param name="writeKey"></param>
-		public Client(string writeKey) : this(writeKey, new Config()) { }
-
-		/// <summary>
-		/// Creates a new REST client with a specified API writeKey and default config
-		/// </summary>
-		/// <param name="writeKey"></param>
-		/// <param name="config"></param>
-		public Client(string writeKey, Config config)
-		{
-			if (String.IsNullOrEmpty(writeKey))
-				throw new InvalidOperationException("Please supply a valid writeKey to initialize.");
-
-			this.Statistics = new Statistics();
-
-			this._writeKey = writeKey;
-			this._config = config;
-
-			IRequestHandler requestHandler = new BlockingRequestHandler(config.Host, config.Timeout);
-			IBatchFactory batchFactory = new SimpleBatchFactory(this._writeKey);
-
-			requestHandler.Succeeded += (action) =>
-			{
-				this.Statistics.Succeeded += 1;
-				if (Succeeded != null) Succeeded(action);
-			};
-
-			requestHandler.Failed += (action, e) =>
-			{
-				this.Statistics.Failed += 1;
-				if (Failed != null) Failed(action, e);
-			};
-
-			if (config.Async)
-				_flushHandler = new AsyncFlushHandler(batchFactory, requestHandler, config.MaxQueueSize);
-			else
-				_flushHandler = new BlockingFlushHandler(batchFactory, requestHandler);
-		}
-
-		#endregion
-
 		#region Properties
+
+		public Statistics Statistics { get; private set; }
 
 		public string WriteKey
 		{
@@ -86,12 +44,94 @@ namespace Segment
 			}
 		}
 
-
 		public Config Config
 		{
 			get
 			{
 				return _config;
+			}
+		}
+
+		#endregion
+
+		#region Initialization
+
+		public Client()
+		{
+		}
+
+		/// <summary>
+		/// Creates a new REST client with a specified API writeKey and default config
+		/// </summary>
+		/// <param name="writeKey"></param>
+		public Client(string writeKey) : this(writeKey, new Config())
+		{
+		}
+
+		/// <summary>
+		/// Creates a new REST client with a specified API writeKey and default config
+		/// </summary>
+		/// <param name="writeKey"></param>
+		/// <param name="config"></param>
+		public Client(string writeKey, Config config)
+		{
+			Initialize(writeKey, config);
+		}
+
+		/// <summary>
+		/// Creates a new REST client with a specified API writeKey and default config
+		/// </summary>
+		/// <param name="writeKey"></param>
+		public void Initialize(string writeKey)
+		{
+			Initialize(writeKey, new Config());
+		}
+
+		/// <summary>
+		/// Creates a new REST client with a specified API writeKey and default config
+		/// </summary>
+		/// <param name="writeKey"></param>
+		/// <param name="config"></param>
+		public virtual void Initialize(string writeKey, Config config)
+		{
+			if (String.IsNullOrEmpty(writeKey))
+			{
+				throw new InvalidOperationException("Please supply a valid writeKey to initialize.");
+			}
+
+			this.Statistics = new Statistics();
+
+			this._writeKey = writeKey;
+			this._config = config ?? new Config();
+
+			IRequestHandler requestHandler = new BlockingRequestHandler(Config.Host, Config.Timeout);
+			IBatchFactory batchFactory = new SimpleBatchFactory(WriteKey);
+
+			requestHandler.Succeeded += (action) =>
+			{
+				this.Statistics.Succeeded += 1;
+				if (Succeeded != null)
+				{
+					Succeeded(action);
+				}
+			};
+
+			requestHandler.Failed += (action, e) =>
+			{
+				this.Statistics.Failed += 1;
+				if (Failed != null)
+				{
+					Failed(action, e);
+				}
+			};
+
+			if (Config.Async)
+			{
+				_flushHandler = new AsyncFlushHandler(batchFactory, requestHandler, Config.MaxQueueSize);
+			}
+			else
+			{
+				_flushHandler = new BlockingFlushHandler(batchFactory, requestHandler);
 			}
 		}
 
@@ -137,7 +177,7 @@ namespace Segment
 		/// <param name="options">Options allowing you to set timestamp, anonymousId, target integrations,
 		/// and the context of th emessage.</param>
 		///
-		public void Identify(string userId, IDictionary<string, object> traits, Options options)
+		public virtual void Identify(string userId, IDictionary<string, object> traits, Options options)
 		{
 			ensureId(userId, options);
 

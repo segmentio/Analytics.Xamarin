@@ -20,7 +20,7 @@ namespace Segment.Model
 		[JsonProperty(PropertyName = "properties")]
 		private IDictionary<string, object> Properties { get; set; }
 
-		internal Screen(string userId,
+		public Screen(string userId,
 						string name,
 						string category,
 						IDictionary<string, object> properties,

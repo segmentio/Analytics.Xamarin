@@ -14,7 +14,7 @@ namespace Segment
 		/// </summary>
 		static readonly object padlock = new object();
 
-		public static Client Client { get; private set; }
+		public static IClient Client { get; private set; }
 
 		/// <summary>
 		/// Initialized the default Segment.io client with your API writeKey.
