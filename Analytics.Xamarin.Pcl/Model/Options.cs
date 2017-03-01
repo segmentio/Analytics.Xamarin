@@ -6,7 +6,7 @@ namespace Segment.Model
 {
 	public class Options
 	{
-		public string AnonymousId { get; private set; }
+		public string AnonymousId { get; set; }
 		public Dict Integrations { get; private set; }
 		public DateTime? Timestamp { get; private set; }
 		public Context Context { get; private set; }

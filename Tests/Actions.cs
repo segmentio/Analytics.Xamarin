@@ -46,39 +46,39 @@ namespace Segment.Test
 			);
 		}
 
-		public static void Identify(Client client)
+		public static void Identify(IClient client)
 		{
 			client.Identify("user", Traits(), Options());
 			Analytics.Client.Flush();
 		}
 
-		public static void Group(Client client)
+		public static void Group(IClient client)
 		{
 			client.Group("user", "group", Traits(), Options());
 			Analytics.Client.Flush();
 		}
 
-		public static void Track(Client client)
+		public static void Track(IClient client)
 		{
 			client.Track("user", "Ran .NET test", Properties(), Options());
 		}
 
-		public static void Alias(Client client)
+		public static void Alias(IClient client)
 		{
-			client.Alias("previousId", "to");
+			client.Alias("previousId", "to", null);
 		}
 
-		public static void Page(Client client)
+		public static void Page(IClient client)
 		{
 			client.Page("user", "name", "category", Properties(), Options());
 		}
 
-		public static void Screen(Client client)
+		public static void Screen(IClient client)
 		{
 			client.Screen("user", "name", "category", Properties(), Options());
 		}
 
-		public static void Random(Client client)
+		public static void Random(IClient client)
 		{
 			switch (random.Next(0, 6))
 			{
