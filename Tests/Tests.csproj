@@ -59,6 +59,7 @@
   <ItemGroup>
     <Compile Include="Actions.cs" />
     <Compile Include="ActionTests.cs" />
+    <Compile Include="ClientTests.cs" />
     <Compile Include="Constants.cs" />
     <Compile Include="FlushTests.cs" />
   </ItemGroup>
