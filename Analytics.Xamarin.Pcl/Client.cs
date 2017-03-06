@@ -75,6 +75,9 @@ namespace Segment
 		/// <param name="config"></param>
 		public Client(string writeKey, Config config)
 		{
+			this._writeKey = writeKey;
+			this._config = config ?? new Config();
+
 			Initialize(writeKey, config);
 		}
 
@@ -82,17 +85,8 @@ namespace Segment
 		/// Creates a new REST client with a specified API writeKey and default config
 		/// </summary>
 		/// <param name="writeKey"></param>
-		public void Initialize(string writeKey)
-		{
-			Initialize(writeKey, new Config());
-		}
-
-		/// <summary>
-		/// Creates a new REST client with a specified API writeKey and default config
-		/// </summary>
-		/// <param name="writeKey"></param>
 		/// <param name="config"></param>
-		public virtual void Initialize(string writeKey, Config config)
+		protected virtual void Initialize(string writeKey, Config config)
 		{
 			if (String.IsNullOrEmpty(writeKey))
 			{
@@ -100,9 +94,6 @@ namespace Segment
 			}
 
 			this.Statistics = new Statistics();
-
-			this._writeKey = writeKey;
-			this._config = config ?? new Config();
 
 			IRequestHandler requestHandler = new BlockingRequestHandler(Config.Host, Config.Timeout);
 			IBatchFactory batchFactory = new SimpleBatchFactory(WriteKey);

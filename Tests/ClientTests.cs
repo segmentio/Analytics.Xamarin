@@ -27,6 +27,10 @@ namespace Tests
 
 				return true;
 			}
+
+			protected override void Initialize(string writeKey, Config config)
+			{
+			}
 		}
 
 		[Test]
@@ -64,13 +68,6 @@ namespace Tests
 		}
 
 		[Test]
-		public void LateInit()
-		{
-			var test = new TestClient();
-			test.Initialize(Segment.Test.Constants.WRITE_KEY);
-		}
-
-		[Test]
 		public void initConfig()
 		{
 			var test = new Client(Segment.Test.Constants.WRITE_KEY);
@@ -94,24 +91,21 @@ namespace Tests
 		[Test]
 		public void initConfig_3()
 		{
-			var test = new Client();
-			test.Initialize(Segment.Test.Constants.WRITE_KEY);
+			var test = new Client(Segment.Test.Constants.WRITE_KEY);
 			Assert.IsNotNull(test.Config);
 		}
 
 		[Test]
 		public void initConfig_4()
 		{
-			var test = new Client();
-			test.Initialize(Segment.Test.Constants.WRITE_KEY, new Config());
+			var test = new Client(Segment.Test.Constants.WRITE_KEY, new Config());
 			Assert.IsNotNull(test.Config);
 		}
 
 		[Test]
 		public void initConfig_5()
 		{
-			var test = new Client();
-			test.Initialize(Segment.Test.Constants.WRITE_KEY, null);
+			var test = new Client(Segment.Test.Constants.WRITE_KEY, null);
 			Assert.IsNotNull(test.Config);
 		}
 	}

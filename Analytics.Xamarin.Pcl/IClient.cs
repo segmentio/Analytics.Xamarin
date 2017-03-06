@@ -29,13 +29,6 @@ namespace Segment
 		#region Methods
 
 		/// <summary>
-		/// Creates a new REST client with a specified API writeKey and default config
-		/// </summary>
-		/// <param name="writeKey"></param>
-		/// <param name="config"></param>
-		void Initialize(string writeKey, Config config = null);
-
-		/// <summary>
 		/// Identifying a visitor ties all of their actions to an ID you
 		/// recognize and records visitor traits you can segment by.
 		/// </summary>
