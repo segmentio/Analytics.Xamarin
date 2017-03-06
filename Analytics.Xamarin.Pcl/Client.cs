@@ -56,10 +56,6 @@ namespace Segment
 
 		#region Initialization
 
-		public Client()
-		{
-		}
-
 		/// <summary>
 		/// Creates a new REST client with a specified API writeKey and default config
 		/// </summary>
