@@ -41,10 +41,22 @@ namespace Segment.Request
 		internal BlockingRequestHandler(string host, TimeSpan timeout)
 		{
 			this._host = host;
-			this._client = new HttpClient();
+			if (!string.IsNullOrEmpty(_client.Config.Proxy))
+			{
+				var handler = new HttpClientHandler
+				{
+					Proxy = new WebProxy(_client.Config.Proxy),
+					UseProxy = true
+				};
+				this._client = new HttpClient(handler);
+			}
+			else
+				this._client = new HttpClient();
+
 			this._client.Timeout = timeout;
 			// do not use the expect 100-continue behavior
 			this._client.DefaultRequestHeaders.ExpectContinue = false;
+
 		}
 
 		public void SendBatch(Batch batch)

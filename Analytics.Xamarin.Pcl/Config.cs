@@ -15,6 +15,8 @@ namespace Segment
 		/// </summary>
 		internal string Host { get; set; }
 
+		internal string Proxy { get; set; }
+
 		internal int MaxQueueSize { get; set; }
 
 		internal bool Async { get; set; }
@@ -24,9 +26,21 @@ namespace Segment
 		public Config()
 		{
 			this.Host = Defaults.Host;
+			this.Proxy = "";
 			this.Timeout = Defaults.Timeout;
 			this.MaxQueueSize = Defaults.MaxQueueCapacity;
 			this.Async = Defaults.Async;
+		}
+
+		/// <summary>
+		/// Set the proxy server Uri
+		/// </summary>
+		/// <param name="proxy">Proxy server Uri</param>
+		/// <returns></returns>
+		public Config SetProxy(string proxy)
+		{
+			this.Proxy = proxy;
+			return this;
 		}
 
 		/// <summary>
