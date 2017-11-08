@@ -1,0 +1,25 @@
+version: 2
+jobs:
+  build:
+    working_directory: /temp
+    docker:
+      - image: nathansamson/xamarin-android-docker
+    steps:
+      - checkout
+      - run: nuget restore
+      - run: xbuild Analytics.Xamarin.Android/Analytics.Xamarin.Android.csproj /p:Configuration=Release
+  test:
+    working_directory: /test
+    docker:
+      - image: nathansamson/xamarin-android-docker
+    steps:
+      - checkout
+      - run: nuget restore
+      - run: xbuild Tests/Tests.csproj /p:Configuration=Release
+      - run: mono --debug --profile=monocov ./packages/NUnit.ConsoleRunner.3.7.0/tools/nunit3-console.exe Test.Net35/bin/Debug/Test.Net35.dll
+workflows:
+  version: 2
+  build_and_test:
+    jobs:
+      - build
+      - test
