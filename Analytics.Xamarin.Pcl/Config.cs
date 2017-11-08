@@ -30,6 +30,17 @@ namespace Segment
 		}
 
 		/// <summary>
+		/// Set the API host server address, instead of default server "https://api.segment.io"
+ 		/// </summary>
+ 		/// <param name="host">Host server url</param>
+ 		/// <returns></returns>
+ 		public Config SetHost(string host)
+ 		{
+ 			this.Host = host;
+ 			return this;
+ 		}
+
+		/// <summary>
 		/// Sets the maximum amount of timeout on the HTTP request flushes to the server.
 		/// </summary>
 		/// <param name="timeout"></param>
