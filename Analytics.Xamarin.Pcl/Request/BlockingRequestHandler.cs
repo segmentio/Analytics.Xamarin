@@ -16,6 +16,38 @@ using Segment.Delegates;
 
 namespace Segment.Request
 {
+	internal class WebProxy : System.Net.IWebProxy
+	{
+		private string _proxy;
+
+		public WebProxy(string proxy)
+		{
+			_proxy = proxy;
+			GetProxy(new Uri(proxy)); // ** What does this do?
+		}
+    
+		public System.Net.ICredentials Credentials
+		{
+			get; set;
+		}
+
+		public Uri GetProxy(Uri destination)
+		{
+			if (!String.IsNullOrWhiteSpace(destination.ToString()))
+				return destination;
+			else
+				return new Uri("");
+		}
+
+		public bool IsBypassed(Uri host)
+		{
+			if (!String.IsNullOrWhiteSpace(host.ToString()))
+				return true;
+			else
+				return false;
+		}
+	}
+
 	internal class BlockingRequestHandler : IRequestHandler
 	{
 		/// <summary>
@@ -38,14 +70,14 @@ namespace Segment.Request
 		/// </summary>
 		private HttpClient _client;
 
-		internal BlockingRequestHandler(string host, TimeSpan timeout)
+		internal BlockingRequestHandler(Config config)
 		{
-			this._host = host;
-			if (!string.IsNullOrEmpty(_client.Config.Proxy))
+			this._host = config.Host;
+			if (!string.IsNullOrEmpty(config.Proxy))
 			{
 				var handler = new HttpClientHandler
 				{
-					Proxy = new WebProxy(_client.Config.Proxy),
+					Proxy = new WebProxy(config.Proxy),
 					UseProxy = true
 				};
 				this._client = new HttpClient(handler);
@@ -53,7 +85,7 @@ namespace Segment.Request
 			else
 				this._client = new HttpClient();
 
-			this._client.Timeout = timeout;
+			this._client.Timeout = config.Timeout;
 			// do not use the expect 100-continue behavior
 			this._client.DefaultRequestHeaders.ExpectContinue = false;
 

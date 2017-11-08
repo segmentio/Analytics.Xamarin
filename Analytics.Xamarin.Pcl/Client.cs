@@ -53,7 +53,7 @@ namespace Segment
 			this._writeKey = writeKey;
 			this._config = config;
 
-			IRequestHandler requestHandler = new BlockingRequestHandler(config.Host, config.Timeout);
+			IRequestHandler requestHandler = new BlockingRequestHandler(config);
 			IBatchFactory batchFactory = new SimpleBatchFactory(this._writeKey);
 
 			requestHandler.Succeeded += (action) =>
