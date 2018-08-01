@@ -1,4 +1,5 @@
 ﻿using System;
+using Plugin.DeviceInfo;
 
 namespace Segment.Model
 {
@@ -15,6 +16,17 @@ namespace Segment.Model
 				{ "name", "Analytics.Xamarin" },
 				{ "version", Analytics.VERSION }
 			});
+
+			// Add os info
+			var os = Plugin.DeviceInfo.CrossDeviceInfo.Current.Version.Split(':');
+			if (os != null && os.Length == 2)
+			{
+				this.Add("os", new Dict()
+				{
+					{ "name", os[0] },
+					{ "version", os[1] }
+				});
+			}
 		}
 
 		public new Context Add(string key, object val)
