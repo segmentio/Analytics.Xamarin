@@ -1,4 +1,6 @@
-﻿Analytics.Xamarin
+[![Build status](https://ci.appveyor.com/api/projects/status/nkigyelj5a3af6i4?svg=true)](https://ci.appveyor.com/project/dlbroadfoot/analytics-xamarin)
+
+Analytics.Xamarin
 =============
 
 Analytics.Xamarin is a [Xamarin](http://xamarin.com) portable class library [(PCL)](http://developer.xamarin.com/guides/cross-platform/application_fundamentals/pcl/) that makes the [Segment](https://segment.com) analytics API available for the following platforms:
