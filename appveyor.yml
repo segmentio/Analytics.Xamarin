@@ -1,0 +1,67 @@
+environment:
+  next_version: 3.0.2
+  is_pr: false
+
+only_commits:
+  files:
+    - src/
+    - nuget/*.nuspec
+image: Visual Studio 2017
+configuration: Release
+init:
+  - ps: >-
+      if ($env:APPVEYOR_REPO_TAG -eq "true")
+      {
+        Update-AppveyorBuild -Version "$env:APPVEYOR_REPO_TAG_NAME"
+      }
+      else
+      {
+        if (-not $env:APPVEYOR_PULL_REQUEST_NUMBER)
+        {
+          $env:is_pr = "false";
+          if ($env:APPVEYOR_REPO_BRANCH -ne "master")
+          {
+            Update-AppveyorBuild -Version "$($env:next_version)-$($env:APPVEYOR_REPO_BRANCH)-build$($env:APPVEYOR_BUILD_NUMBER)"
+          }
+          else
+          {
+            Update-AppveyorBuild -Version "$($env:next_version)-beta$($env:APPVEYOR_BUILD_NUMBER)"
+          }
+        }
+        else
+        {
+          $env:is_pr = "true";
+          Update-AppveyorBuild -Version "$($env:next_version)-pr$($env:APPVEYOR_PULL_REQUEST_NUMBER)-build$($env:APPVEYOR_BUILD_NUMBER)"
+        }
+      }
+assembly_info:
+  patch: true
+  file: '**\AssemblyInfo.*'
+  assembly_version: '{version}'
+  assembly_file_version: '{version}'
+  assembly_informational_version: '{version}'
+before_build:
+- cmd: nuget restore Analytics.Xamarin.sln
+build:
+  project: Analytics.Xamarin.sln
+  verbosity: minimal
+after_build:
+- cmd: nuget pack Analytics.Xamarin.nuspec -basepath "./" -version "%APPVEYOR_BUILD_VERSION%"
+artifacts:
+- path: '*.nupkg'
+
+deploy:
+  - provider: NuGet
+    server: http://packages.smokeball.com/nuget/smokeball/
+    api_key:
+      secure: Gb5neQyAROVe6WHeeLpjwGG0VPyVX8Oy/3eUUQBLpQA=
+    on:
+      branch: master
+      is_pr: false
+
+  - provider: NuGet
+    server: http://packages.smokeball.com/nuget/smokeball/
+    api_key:
+      secure: http://packages.smokeball.com/nuget/smokeball/
+    on:
+      appveyor_repo_tag: true
