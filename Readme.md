@@ -4,7 +4,7 @@
 Analytics.Xamarin is a [Xamarin](http://xamarin.com) portable class library [(PCL)](http://developer.xamarin.com/guides/cross-platform/application_fundamentals/pcl/) that makes the [Segment](https://segment.com) analytics API available for the following platforms:
 
 <div align="center">
-  ![platforms](https://cloud.githubusercontent.com/assets/658544/3238915/a9ec3382-f100-11e3-86be-92a04a4726b1.png)
+  <img src="https://cloud.githubusercontent.com/assets/658544/3238915/a9ec3382-f100-11e3-86be-92a04a4726b1.png"/>
 </div>
 
 <div align="center">
