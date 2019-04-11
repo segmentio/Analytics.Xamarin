@@ -2,7 +2,7 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
     <metadata>
         <id>Analytics.Xamarin</id>
-        <version>1.0.4</version>
+        <version>1.0.6</version>
         <title>Analytics.Xamarin</title>
         <authors>Ilya</authors>
         <owners>Ilya Volodarsky &lt;friends@segment.io&gt;</owners>
@@ -38,7 +38,7 @@
 	<files>
 
 		<!--Core-->
-		<file src="Analytics.Xamarin.Core\bin\Release\netstandard2.0\Analytics.Xamarin.Core.dll" target="lib\netstandard2.0+MonoAndroid10+MonoTouch10+Xamarin.iOS10\Analytics.Xamarin.Core.dll" />
+		<file src="Analytics.Xamarin.Core\bin\Release\netstandard2.0\Analytics.Xamarin.Core.dll" target="lib\netstandard2.0\Analytics.Xamarin.Core.dll" />
 
 		<!--Xamarin.Android-->
 		<file src="Analytics.Xamarin.Core\bin\Release\netstandard2.0\Analytics.Xamarin.Core.dll" target="lib\MonoAndroid10\Analytics.Xamarin.Core.dll" />
