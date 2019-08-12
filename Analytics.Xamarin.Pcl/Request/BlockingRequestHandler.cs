@@ -84,7 +84,7 @@ namespace Segment.Request
 					Succeed(batch);
 					Logger.Info("Request successful", props);
 					result = true;
-                }
+				}
 				else
 				{
 					string reason = string.Format("Status Code {0} ", response.StatusCode);
