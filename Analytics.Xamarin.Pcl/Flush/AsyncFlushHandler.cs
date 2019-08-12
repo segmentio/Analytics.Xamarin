@@ -163,11 +163,13 @@ namespace Segment.Flush
 						{ "batch size", current.Count }
 					});
 
-					// make the request here
-					_requestHandler.SendBatch(batch);
-
-					// mark the current batch as null
-					current = new List<BaseAction>();
+                    // send the batch async
+                    Task<bool> res = Task.Run(() => _requestHandler.SendBatch(batch));
+                    // clear the current only of the batch was sent successfully
+                    if (res.Result)
+                    {
+                        current = new List<BaseAction>();
+                    }
 				}
 			}
 		}

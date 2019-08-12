@@ -47,13 +47,13 @@ namespace Segment.Request
 			this._client.DefaultRequestHeaders.ExpectContinue = false;
 		}
 
-		public void SendBatch(Batch batch)
+		public bool SendBatch(Batch batch)
 		{
 			Dict props = new Dict {
 				{ "batch id", batch.MessageId },
 				{ "batch size", batch.batch.Count }
 			};
-
+            bool result = false;
 			try
 			{
 				// set the current request time
@@ -83,7 +83,8 @@ namespace Segment.Request
 				{
 					Succeed(batch);
 					Logger.Info("Request successful", props);
-				}
+                    result = true;
+                }
 				else
 				{
 					string reason = string.Format("Status Code {0} ", response.StatusCode);
@@ -99,6 +100,7 @@ namespace Segment.Request
 				Logger.Error("Request failed", props);
 				Fail(batch, e);
 			}
+            return result;
 		}
 
 		private void Fail(Batch batch, System.Exception e)
