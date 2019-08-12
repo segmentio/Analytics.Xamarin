@@ -53,7 +53,7 @@ namespace Segment.Request
 				{ "batch id", batch.MessageId },
 				{ "batch size", batch.batch.Count }
 			};
-            bool result = false;
+			bool result = false;
 			try
 			{
 				// set the current request time
@@ -83,7 +83,7 @@ namespace Segment.Request
 				{
 					Succeed(batch);
 					Logger.Info("Request successful", props);
-                    result = true;
+					result = true;
                 }
 				else
 				{
@@ -100,7 +100,7 @@ namespace Segment.Request
 				Logger.Error("Request failed", props);
 				Fail(batch, e);
 			}
-            return result;
+			return result;
 		}
 
 		private void Fail(Batch batch, System.Exception e)
