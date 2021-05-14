@@ -14,6 +14,7 @@ namespace Segment.Model
 		[JsonProperty(PropertyName = "userId")]
 		private string UserId { get; set; }
 
+		[JsonConstructor]
 		internal Alias(string previousId, string userId, Options options)
 			: base("alias", options)
 		{

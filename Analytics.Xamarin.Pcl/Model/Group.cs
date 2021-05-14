@@ -17,6 +17,7 @@ namespace Segment.Model
 		[JsonProperty(PropertyName = "traits")]
 		private IDictionary<string, object> Traits { get; set; }
 
+		[JsonConstructor]
 		internal Group(string userId,
 					   string groupId,
 					   IDictionary<string, object> traits,

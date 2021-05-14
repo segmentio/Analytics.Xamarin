@@ -17,6 +17,7 @@ namespace Segment.Model
 		[JsonProperty(PropertyName = "properties")]
 		private IDictionary<string, object> Properties { get; set; }
 
+		[JsonConstructor]
 		internal Track(string userId,
 					   string eventName,
 					   IDictionary<string, object> properties,
