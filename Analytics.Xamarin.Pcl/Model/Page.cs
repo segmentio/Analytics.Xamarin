@@ -20,6 +20,7 @@ namespace Segment.Model
 		[JsonProperty(PropertyName = "properties")]
 		private IDictionary<string, object> Properties { get; set; }
 
+		[JsonConstructor]
 		internal Page(string userId,
 					  string name,
 					  string category,
