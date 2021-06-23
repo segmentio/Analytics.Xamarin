@@ -12,13 +12,13 @@ namespace Segment.Model
 		public string UserId { get; private set; }
 
 		[JsonProperty(PropertyName = "name")]
-		private string Name { get; set; }
+		public string Name { get; set; }
 
 		[JsonProperty(PropertyName = "category")]
-		private string Category { get; set; }
+		public string Category { get; set; }
 
 		[JsonProperty(PropertyName = "properties")]
-		private IDictionary<string, object> Properties { get; set; }
+		public IDictionary<string, object> Properties { get; set; }
 
 		[JsonConstructor]
 		internal Page(string userId,
