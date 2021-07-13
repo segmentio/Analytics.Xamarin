@@ -14,6 +14,7 @@ namespace Segment.Model
 		[JsonProperty(PropertyName = "traits")]
 		public IDictionary<string, object> Traits { get; set; }
 
+		[JsonConstructor]
 		internal Identify(string userId,
 						  IDictionary<string, object> traits,
 						  Options options)

@@ -12,11 +12,12 @@ namespace Segment.Model
 		public string UserId { get; private set; }
 
 		[JsonProperty(PropertyName = "event")]
-		private string EventName { get; set; }
+		public string EventName { get; set; }
 
 		[JsonProperty(PropertyName = "properties")]
-		private IDictionary<string, object> Properties { get; set; }
+		public IDictionary<string, object> Properties { get; set; }
 
+		[JsonConstructor]
 		internal Track(string userId,
 					   string eventName,
 					   IDictionary<string, object> properties,

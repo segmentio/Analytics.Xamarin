@@ -9,11 +9,12 @@ namespace Segment.Model
 	public class Alias : BaseAction
 	{
 		[JsonProperty(PropertyName = "previousId")]
-		private string PreviousId { get; set; }
+		public string PreviousId { get; set; }
 
 		[JsonProperty(PropertyName = "userId")]
-		private string UserId { get; set; }
+		public string UserId { get; set; }
 
+		[JsonConstructor]
 		internal Alias(string previousId, string userId, Options options)
 			: base("alias", options)
 		{
