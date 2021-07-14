@@ -16,6 +16,37 @@ using Segment.Delegates;
 
 namespace Segment.Request
 {
+	class WebProxy : System.Net.IWebProxy
+	{
+		private string _proxy;
+
+		public WebProxy(string proxy)
+		{
+			_proxy = proxy;
+			GetProxy(new Uri(proxy)); // ** What does this do?
+		}
+
+		public System.Net.ICredentials Credentials
+		{
+			get; set;
+		}
+
+		public Uri GetProxy(Uri destination)
+		{
+			if (!String.IsNullOrWhiteSpace(destination.ToString()))
+				return destination;
+			else
+				return new Uri("");
+		}
+
+		public bool IsBypassed(Uri host)
+		{
+			if (!String.IsNullOrWhiteSpace(host.ToString()))
+				return true;
+			else
+				return false;
+		}
+	}
 	internal class BlockingRequestHandler : IRequestHandler
 	{
 		/// <summary>
@@ -29,22 +60,36 @@ namespace Segment.Request
 		public event SucceededActionHandler Succeeded;
 
 		/// <summary>
-		/// Segment API endpoint.
+		/// Segment client
 		/// </summary>
-		private string _host;
+		private readonly Client _client;
 
 		/// <summary>
 		/// Http client
 		/// </summary>
-		private HttpClient _client;
+		private readonly HttpClient _httpClient;
 
-		internal BlockingRequestHandler(string host, TimeSpan timeout)
+		
+
+		internal BlockingRequestHandler(Client client, TimeSpan timeout)
 		{
-			this._host = host;
-			this._client = new HttpClient();
-			this._client.Timeout = timeout;
+			this._client = client;
+
+			if (!string.IsNullOrEmpty(_client.Config.Proxy))
+			{
+				var handler = new HttpClientHandler
+				{
+					Proxy = new WebProxy(_client.Config.Proxy),
+					UseProxy = true
+				};
+				this._httpClient = new HttpClient(handler);
+			}
+			else
+				this._httpClient = new HttpClient();
+
+			this._httpClient.Timeout = timeout;
 			// do not use the expect 100-continue behavior
-			this._client.DefaultRequestHeaders.ExpectContinue = false;
+			this._httpClient.DefaultRequestHeaders.ExpectContinue = false;
 		}
 
 		public void SendBatch(Batch batch)
@@ -61,7 +106,7 @@ namespace Segment.Request
 				string json = JsonConvert.SerializeObject(batch);
 				props["json size"] = json.Length;
 
-				Uri uri = new Uri(_host + "/v1/import");
+				Uri uri = new Uri(_client.Config.Host + "/v1/import");
 
 				HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, uri);
 
@@ -73,7 +118,7 @@ namespace Segment.Request
 
 				var start = DateTime.Now;
 
-				var response = _client.SendAsync(request).Result;
+				var response = _httpClient.SendAsync(request).Result;
 
 				var duration = DateTime.Now - start;
 				props["success"] = response.IsSuccessStatusCode;
