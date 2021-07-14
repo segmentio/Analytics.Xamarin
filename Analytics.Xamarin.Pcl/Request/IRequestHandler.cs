@@ -13,7 +13,7 @@ namespace Segment.Request
 		/// Send an action batch to the Segment tracking API.
 		/// </summary>
 		/// <param name="batch">Batch.</param>
-		void SendBatch(Batch batch);
+		bool SendBatch(Batch batch);
 
 		/// <summary>
 		/// Occurs when an action fails.
