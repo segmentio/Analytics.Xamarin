@@ -1,7 +1,7 @@
 ﻿Analytics.Xamarin
 =============
 
-### The [Analytics-CSharp](https://github.com/segmentio/analytics-csharp) library is currently in beta and is governed by Segment’s [First Access and Beta terms](https://www.twilio.com/legal/tos). Learn more about the [Analytics-CSharp library](/docs/connections/sources/catalog/libraries/server/csharp/). If you'd like to migrate to using Analytics-CSharp, see the [Analytics-CSharp migration guide](/docs/connections/sources/catalog/libraries/server/csharp/migration-guide/).
+### The [Analytics-CSharp](https://github.com/segmentio/analytics-csharp) library is currently in beta and is governed by Segment’s [First Access and Beta terms](https://www.twilio.com/legal/tos). Learn more about the [Analytics-CSharp library](https://segment.com/docs/connections/sources/catalog/libraries/server/csharp/). If you'd like to migrate to using Analytics-CSharp, see the [Analytics-CSharp migration guide](https://segment.com/docs/connections/sources/catalog/libraries/server/csharp/migration-guide/).
 
 Analytics.Xamarin is a [Xamarin](http://xamarin.com) portable class library [(PCL)](http://developer.xamarin.com/guides/cross-platform/application_fundamentals/pcl/) that makes the [Segment](https://segment.com) analytics API available for the following platforms:
 
