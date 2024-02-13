@@ -6,7 +6,6 @@ Analytics.Xamarin is a [Xamarin](http://xamarin.com) portable class library [(PC
 ### ⚠️ Community ⚠️
 This library is community supported. Segment does not manage or update this library. We suggest forking the repo if changes are needed for your project.
 
-(if there’s a newer version)
 We highly recommend using our upgraded [Analytics-CSharp](https://github.com/segmentio/Analytics-CSharp) to benefit from feature enhancements and ongoing support.
 
 <div align="center">
