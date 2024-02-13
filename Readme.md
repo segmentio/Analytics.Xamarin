@@ -1,12 +1,13 @@
 ﻿Analytics.Xamarin
 =============
 
-⚠️ **WARNING** ⚠️
-
-Segment will continue to accept incoming traffic from Analytics.Xamarin. However, we have launched our new flagship library, [Analytics-CSharp](https://github.com/segmentio/Analytics-CSharp), with new functionality such as the ability to write plugins to enrich data, drop data, and/or direct the data to a different server, etc. You can also customize your storage and httpClient, write your own flush policy, as well as choose your preferred JSON library. See the [Analytics-CSharp Migration Guide](https://segment.com/docs/connections/sources/catalog/libraries/server/csharp/migration-guide/) for more details.
-
-
 Analytics.Xamarin is a [Xamarin](http://xamarin.com) portable class library [(PCL)](http://developer.xamarin.com/guides/cross-platform/application_fundamentals/pcl/) that makes the [Segment](https://segment.com) analytics API available for the following platforms:
+
+### ⚠️ Community ⚠️
+This library is community supported. Segment does not manage or update this library. We suggest forking the repo if changes are needed for your project.
+
+(if there’s a newer version)
+We highly recommend using our upgraded [Analytics-CSharp](https://github.com/segmentio/Analytics-CSharp) to benefit from feature enhancements and ongoing support.
 
 <div align="center">
   <img src="https://cloud.githubusercontent.com/assets/658544/3238915/a9ec3382-f100-11e3-86be-92a04a4726b1.png"/>
